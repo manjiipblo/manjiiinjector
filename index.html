@@ -1,3 +1,4 @@
+const html = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -352,8 +353,13 @@ input { width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 
 </div>
 
 <script>
-let expiration = ${exp};
+let expiration = 0;
 let selectedDeviceName = "";
+
+const getHWID = () => {
+    const info = navigator.userAgent + screen.width + navigator.language;
+    return btoa(info).slice(0, 16); 
+};
 
 // LOGIKA CHART CPU BARU (SESUAI PERINTAH)
 let cpuData = Array(30).fill(20); 
@@ -405,11 +411,6 @@ function initTradingChart() {
     draw();
 }
 
-const getHWID = () => {
-    const info = navigator.userAgent + screen.width + navigator.language;
-    return btoa(info).slice(0, 16); 
-};
-    
 async function handleLogin() {
     const key = document.getElementById('key-input').value;
     const err = document.getElementById('errMsg');
@@ -419,6 +420,7 @@ async function handleLogin() {
         document.getElementById('overlay-loader').style.display = 'flex';
 
         try {
+            // Membaca database langsung dari repository GitHub kamu
             const response = await fetch('manjii_v2.json');
             if (!response.ok) throw new Error("DB_NOT_FOUND");
             
@@ -437,6 +439,7 @@ async function handleLogin() {
                 return showErr("KEY SUDAH EXPIRED");
             }
 
+            // Simpan HWID di browser (localStorage)
             let savedID = localStorage.getItem("manjii_hwid_" + key);
             if (!savedID) {
                 localStorage.setItem("manjii_hwid_" + key, myID);
@@ -446,8 +449,7 @@ async function handleLogin() {
 
             let diffInMs = keyData.expiry - now;
             let daysLeft = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
-            if (daysLeft < 0) daysLeft = 0;
-
+            
             loginSuccess(daysLeft);
 
         } catch (e) {
@@ -470,25 +472,29 @@ function loginSuccess(daysLeft) {
     const bF = document.getElementById('bar-f');
     const sT = document.getElementById('st-txt');
     
+    // Update angka durasi di menu akun sebelum masuk
     const dayElement = document.getElementById('exp-days');
     if(dayElement) {
         dayElement.innerText = daysLeft;
     }
 
-    if(sT) sT.innerText = "MENYAMBUNGKAN KE DATABASE MANJII IOS...";
+    sT.innerText = "MENYAMBUNGKAN KE DATABASE MANJII IOS...";
     
     let iv = setInterval(() => {
         p += 5; 
         if(p > 100) p = 100; 
-        if(pT) pT.innerText = p + "%"; 
-        if(bF) bF.style.width = p + "%";
+        pT.innerText = p + "%"; 
+        bF.style.width = p + "%";
         
         if(p >= 100) {
             clearInterval(iv);
             setTimeout(() => {
                 document.getElementById('overlay-loader').style.display = 'none';
                 document.getElementById('login-screen').style.display = 'none';
+                // Pindah ke pemilihan device sesuai alur script Anda
                 document.getElementById('device-selection-screen').style.display = 'flex';
+                
+                // Suara sambutan dengan info durasi
                 speak("Login berhasil. sisa masa aktif anda " + daysLeft + " hari");
             }, 800);
         }
@@ -646,4 +652,4 @@ function speak(t) {
 }
 </script>
 </body>
-</html>
+</html
