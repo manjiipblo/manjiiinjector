@@ -407,41 +407,38 @@ function initTradingChart() {
     draw();
 }
 
+const getHWID = () => {
+    const info = navigator.userAgent + screen.width + navigator.language;
+    return btoa(info).slice(0, 16); 
+};
+    
 async function handleLogin() {
     const key = document.getElementById('key-input').value;
     const err = document.getElementById('errMsg');
     
     if(key.length > 3) {
-        err.style.display = "none";
-        // Tampilkan loader saat proses pengecekan
+        if(err) err.style.display = "none";
         document.getElementById('overlay-loader').style.display = 'flex';
 
         try {
-            // Mengambil database dari file JSON di repo GitHub kamu
             const response = await fetch('manjii_v2.json');
-            if (!response.ok) throw new Error("DATABASE TIDAK DITEMUKAN");
+            if (!response.ok) throw new Error("DB_NOT_FOUND");
             
             const db = await response.json();
             const keyData = db[key];
-            
-            // Fingerprint browser sebagai pengganti Device.name (HWID)
-            const myID = btoa(navigator.userAgent + screen.width).slice(0, 16);
+            const myID = getHWID();
 
-            // VALIDASI 1: Cek apakah key terdaftar
             if (!keyData) return showErr("INVALID KEY");
 
-            // VALIDASI 2: Cek status BANNED
             if (keyData.status === "BANNED") {
                 return showErr("KEY DI BANNED OLEH DEVELOPER MANJII IOS");
             }
 
-            // VALIDASI 3: Cek Masa Berlaku (Expired)
             let now = new Date().getTime();
             if (now > keyData.expiry) {
                 return showErr("KEY SUDAH EXPIRED");
             }
 
-            // VALIDASI 4: Logika 1 Key 1 Device (HWID Lock versi Web)
             let savedID = localStorage.getItem("manjii_hwid_" + key);
             if (!savedID) {
                 localStorage.setItem("manjii_hwid_" + key, myID);
@@ -449,16 +446,14 @@ async function handleLogin() {
                 return showErr("KEY TELAH DIGUNAKAN DI PERANGKAT LAIN");
             }
 
-            // Jika semua lolos, hitung sisa hari
             let diffInMs = keyData.expiry - now;
             let daysLeft = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
             if (daysLeft < 0) daysLeft = 0;
 
-            // Jalankan fungsi loginSuccess yang sudah kamu punya
             loginSuccess(daysLeft);
 
         } catch (e) {
-            showErr("GAGAL MENGHUBUNGKAN KE SERVER DATABASE");
+            showErr("GAGAL TERHUBUNG KE DATABASE");
         }
     } else { 
         alert("SILAHKAN MASUKKAN KEY YANG VALID!"); 
@@ -468,7 +463,10 @@ async function handleLogin() {
 function showErr(msg) {
     document.getElementById('overlay-loader').style.display = 'none';
     const err = document.getElementById('errMsg');
-    err.innerText = msg; err.style.display = "block";
+    if (err) {
+        err.innerText = msg; 
+        err.style.display = "block";
+    }
 }
 
 function loginSuccess(daysLeft) {
@@ -477,29 +475,25 @@ function loginSuccess(daysLeft) {
     const bF = document.getElementById('bar-f');
     const sT = document.getElementById('st-txt');
     
-    // Update angka durasi di menu akun sebelum masuk
     const dayElement = document.getElementById('exp-days');
     if(dayElement) {
         dayElement.innerText = daysLeft;
     }
 
-    sT.innerText = "MENYAMBUNGKAN KE DATABASE MANJII IOS...";
+    if(sT) sT.innerText = "MENYAMBUNGKAN KE DATABASE MANJII IOS...";
     
     let iv = setInterval(() => {
         p += 5; 
         if(p > 100) p = 100; 
-        pT.innerText = p + "%"; 
-        bF.style.width = p + "%";
+        if(pT) pT.innerText = p + "%"; 
+        if(bF) bF.style.width = p + "%";
         
         if(p >= 100) {
             clearInterval(iv);
             setTimeout(() => {
                 document.getElementById('overlay-loader').style.display = 'none';
                 document.getElementById('login-screen').style.display = 'none';
-                // Pindah ke pemilihan device sesuai alur script Anda
                 document.getElementById('device-selection-screen').style.display = 'flex';
-                
-                // Suara sambutan dengan info durasi
                 speak("Login berhasil. sisa masa aktif anda " + daysLeft + " hari");
             }, 800);
         }
