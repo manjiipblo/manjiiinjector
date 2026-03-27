@@ -14,7 +14,7 @@
     --bg: #010204; [cite: 166]
     --glass: rgba(255, 255, 255, 0.03); [cite: 166]
     --border: rgba(255, 255, 255, 0.08); [cite: 166]
-    --green: #00ff88; [cite: 166]
+    --green: #00ff88; [cite: 167]
     --red: #ff3e3e; [cite: 167]
 }
 * { -webkit-font-smoothing: antialiased; box-sizing: border-box; }
@@ -23,7 +23,7 @@ body { background: var(--bg); color: #fff; font-family: 'Plus Jakarta Sans', san
 /* --- LOGIN & DEVICE SELECTION --- */
 #login-screen, #device-selection-screen { position: fixed; inset: 0; background: var(--bg); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 25px; } [cite: 169]
 .login-box { width: 100%; max-width: 320px; background: var(--glass); border: 1px solid var(--border); border-radius: 35px; padding: 40px 30px; backdrop-filter: blur(30px); text-align: center; } [cite: 170, 171]
-#errMsg { color: var(--red); font-size: 10px; margin-top: 15px; font-family: 'Orbitron'; display: none; } [cite: 264]
+#errMsg { color: var(--red); font-size: 10px; margin-top: 15px; font-family: 'Orbitron'; display: none; } [cite: 167, 264]
 
 .device-option { width: 100%; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 15px; margin-bottom: 10px; color: #fff; font-family: 'Orbitron'; font-size: 12px; cursor: pointer; transition: 0.3s; } [cite: 172]
 .device-option:active { background: var(--cyan); color: #000; } [cite: 173]
@@ -181,8 +181,8 @@ input { width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 
         <div class="section-label">COMBAT DOMINATORS</div>
         <div class="injection-grid">
             <div class="card-mini" onclick="toggleMenu('c1', 'Smooth Drag')">
-                <div class="top-row"><div class="title-txt">Smooth Drag</div><div class="toggle" id="c1"><div class="tg-cir"></div></div></div>
-                <div class="desc-txt">Pergerakan drag shot lebih halus.</div> [cite: 222]
+                <div class="top-row"><div class="title-txt">Smooth Drag</div><div class="toggle" id="c1"><div class="tg-cir"></div></div></div> [cite: 222]
+                <div class="desc-txt">Pergerakan drag shot lebih halus.</div>
             </div>
             <div class="card-mini" onclick="toggleMenu('c2', 'Easy Drag')">
                 <div class="top-row"><div class="title-txt">Easy Drag</div><div class="toggle" id="c2"><div class="tg-cir"></div></div></div>
@@ -193,11 +193,11 @@ input { width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 
                 <div class="desc-txt">Penguncian target tanpa getaran.</div>
             </div>
             <div class="card-mini" onclick="toggleMenu('c4', 'Rapid Fire')">
-                <div class="top-row"><div class="title-txt">Rapid Fire</div><div class="toggle" id="c4"><div class="tg-cir"></div></div></div>
-                <div class="desc-txt">Meningkatkan kecepatan peluru keluar.</div> [cite: 224]
+                <div class="top-row"><div class="title-txt">Rapid Fire</div><div class="toggle" id="c4"><div class="tg-cir"></div></div></div> [cite: 224]
+                <div class="desc-txt">Meningkatkan kecepatan peluru keluar.</div>
             </div>
-            <div class="card-mini" onclick="toggleMenu('c5', 'Long Hit')"> [cite: 225]
-                <div class="top-row"><div class="title-txt">Long Hit</div><div class="toggle" id="c5"><div class="tg-cir"></div></div></div>
+            <div class="card-mini" onclick="toggleMenu('c5', 'Long Hit')">
+                <div class="top-row"><div class="title-txt">Long Hit</div><div class="toggle" id="c5"><div class="tg-cir"></div></div></div> [cite: 225]
                 <div class="desc-txt">Stabilisasi damage jarak jauh.</div>
             </div>
             <div class="card-mini" onclick="toggleMenu('c6', 'Fast Hit')">
@@ -222,7 +222,7 @@ input { width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 
                 <span>1. Sekeliling: <b class="val">-</b></span><span>2. Red Dot: <b class="val">-</b></span>
                 <span>3. 2x Scope: <b class="val">-</b></span><span>4. 4x Scope: <b class="val">-</b></span>
                 <span>5. Sniper: <b class="val">-</b></span><span>6. Kamera: <b class="val">-</b></span>
-                <span>7. Tembak: <b class="val">-</b></span><span>8. Status: <b class="val" style="color:var(--red)">❌</b></span> [cite: 229]
+                <span>7. Tembak: <b class="val">-</b></span><span>8. Status: <b class="val" style="color:var(--red)">✖</b></span> [cite: 229]
             </div>
             <button class="btn-main" style="padding:10px; font-size:10px;" onclick="genSensi()">GENERATE BEST SENSI AI MANJII</button> [cite: 230]
         </div>
@@ -245,8 +245,8 @@ input { width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 
                 <div class="desc-txt">Mempercepat respon sentuhan layar.</div>
             </div>
             <div class="card-mini" onclick="toggleMenu('h4', 'Disk Speed')">
-                <div class="top-row"><div class="title-txt">Disk Speed</div><div class="toggle" id="h4"><div class="tg-cir"></div></div></div> [cite: 234]
-                <div class="desc-txt">Optimasi kecepatan baca tulis penyimpanan.</div>
+                <div class="top-row"><div class="title-txt">Disk Speed</div><div class="toggle" id="h4"><div class="tg-cir"></div></div></div>
+                <div class="desc-txt">Optimasi kecepatan baca tulis penyimpanan.</div> [cite: 234]
             </div>
             <div class="card-mini" onclick="toggleMenu('h5', 'GPUs Boost')">
                 <div class="top-row"><div class="title-txt">GPUs Boost</div><div class="toggle" id="h5"><div class="tg-cir"></div></div></div>
@@ -268,8 +268,8 @@ input { width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 
                 <div class="top-row"><div class="title-txt">Thermal Cool</div><div class="toggle" id="h9"><div class="tg-cir"></div></div></div>
                 <div class="desc-txt">Mendinginkan chipset secara virtual sistem.</div>
             </div>
-            <div class="card-mini" onclick="toggleMenu('h10', 'Resolution+')"> [cite: 238]
-                <div class="top-row"><div class="title-txt">Resolution+</div><div class="toggle" id="h10"><div class="tg-cir"></div></div></div>
+            <div class="card-mini" onclick="toggleMenu('h10', 'Resolution+')">
+                <div class="top-row"><div class="title-txt">Resolution+</div><div class="toggle" id="h10"><div class="tg-cir"></div></div></div> [cite: 238]
                 <div class="desc-txt">Meningkatkan ketajaman pixel pada layar.</div>
             </div>
         </div>
@@ -294,8 +294,8 @@ input { width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 
                 <div class="top-row"><div class="title-txt">Log Eraser</div><div class="toggle" id="s4"><div class="tg-cir"></div></div></div>
                 <div class="desc-txt">Menghapus riwayat jejak modifikasi.</div>
             </div>
-            <div class="card-mini" onclick="toggleMenu('s5', 'Web Stealth')"> [cite: 242]
-                <div class="top-row"><div class="title-txt">Web Stealth</div><div class="toggle" id="s5"><div class="tg-cir"></div></div></div>
+            <div class="card-mini" onclick="toggleMenu('s5', 'Web Stealth')">
+                <div class="top-row"><div class="title-txt">Web Stealth</div><div class="toggle" id="s5"><div class="tg-cir"></div></div></div> [cite: 242]
                 <div class="desc-txt">Menyembunyikan aktivitas trafik jaringan.</div>
             </div>
             <div class="card-mini" onclick="toggleMenu('s6', 'HWID Masker')">
@@ -312,14 +312,12 @@ input { width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 
                 <div class="acc-title">MANJIIVIP-2026</div>
                 <div class="badge">STATUS KEY: AKTIF ✅</div>
             </div>
-            
             <div style="text-align: center; margin-top: -10px; margin-bottom: 15px;"> [cite: 245]
                 <p style="font-size: 8px; opacity: 0.5; margin-bottom: 4px; font-family: 'Orbitron';">CREATED DATE</p> [cite: 246]
                 <div style="font-size: 11px; color: var(--cyan); font-weight: 700; background: rgba(0, 242, 254, 0.05); padding: 5px 15px; border-radius: 10px; display: inline-block; border: 1px solid var(--border);"> [cite: 247, 248]
                    2026-03-25 <span style="opacity:0.3; margin:0 5px;">|</span> MANJII iOS [cite: 249]
                 </div>
             </div>
-
             <div class="timer-wrap">
                 <div class="t-unit"><b id="exp-days">0</b><label>Day</label></div>
             </div>
@@ -348,107 +346,82 @@ input { width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 
 </div>
 
 <script>
-// SIMULASI DATABASE KEY (Bisa diisi manual atau lewat API nantinya)
-const MOCK_DB = {
+// SIMULASI DATABASE KEY (Pengganti manjii_v2.json)
+let MOCK_DB = {
     "MANJII-FREE": { status: "ACTIVE", expiry: new Date().getTime() + (7 * 24 * 60 * 60 * 1000) },
-    "MANJII-PRO": { status: "ACTIVE", expiry: new Date().getTime() + (30 * 24 * 60 * 60 * 1000) }
+    "MANJII-VIP": { status: "ACTIVE", expiry: new Date().getTime() + (30 * 24 * 60 * 60 * 1000) }
 };
 
 let expiration = 0;
 let selectedDeviceName = "";
 
-// LOGIKA CHART CPU [cite: 254-260]
+/* --- LOGIKA CHART CPU (TETAP SAMA) --- */ [cite: 254-260]
 let cpuData = Array(30).fill(20); 
 function initTradingChart() {
     const canvas = document.getElementById('trading-chart');
     const ctx = canvas.getContext('2d');
     const displayPct = document.getElementById('cpu-pct');
-
     function draw() {
         canvas.width = canvas.offsetWidth;
         canvas.height = canvas.offsetHeight;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
         const lastVal = cpuData[cpuData.length - 1]; [cite: 254]
         const newVal = Math.max(10, Math.min(90, lastVal + (Math.random() * 10 - 5)));
-        cpuData.push(newVal);
-        cpuData.shift();
+        cpuData.push(newVal); cpuData.shift();
         displayPct.innerText = Math.floor(newVal) + "%";
-
-        ctx.beginPath();
-        ctx.strokeStyle = '#00f2fe';
-        ctx.lineWidth = 2;
-        ctx.lineJoin = 'round'; [cite: 255]
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = '#00f2fe';
+        ctx.beginPath(); ctx.strokeStyle = '#00f2fe'; ctx.lineWidth = 2; ctx.lineJoin = 'round'; [cite: 255]
+        ctx.shadowBlur = 10; ctx.shadowColor = '#00f2fe';
         const step = canvas.width / (cpuData.length - 1); [cite: 256]
         cpuData.forEach((val, i) => {
-            const x = i * step;
-            const y = canvas.height - (val / 100 * canvas.height);
-            if(i === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
+            const x = i * step; const y = canvas.height - (val / 100 * canvas.height);
+            if(i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
         });
-        ctx.stroke(); [cite: 257]
-
-        ctx.lineTo(canvas.width, canvas.height);
-        ctx.lineTo(0, canvas.height);
+        ctx.stroke(); ctx.lineTo(canvas.width, canvas.height); ctx.lineTo(0, canvas.height); [cite: 257]
         const grad = ctx.createLinearGradient(0,0,0, canvas.height);
-        grad.addColorStop(0, 'rgba(0, 242, 254, 0.2)'); [cite: 258]
-        grad.addColorStop(1, 'transparent');
-        ctx.fillStyle = grad;
-        ctx.fill();
-
+        grad.addColorStop(0, 'rgba(0, 242, 254, 0.2)'); grad.addColorStop(1, 'transparent'); [cite: 258]
+        ctx.fillStyle = grad; ctx.fill();
         setTimeout(() => requestAnimationFrame(draw), 200); [cite: 259]
     }
     draw(); [cite: 260]
 }
 
-function handleLogin() { [cite: 261-263]
+/* --- LOGIKA LOGIN (DIUBAH DARI WEBVIEW ACTION) --- */ [cite: 261-263, 302-306]
+function handleLogin() {
     const key = document.getElementById('key-input').value;
     const err = document.getElementById('errMsg');
-    
-    if(key.length < 4) { [cite: 263]
-        alert("SILAHKAN MASUKKAN KEY YANG VALID!");
-        return;
-    }
-
-    // Cek di Mock DB
-    const keyData = MOCK_DB[key];
-    if (!keyData) {
-        showErr("INVALID KEY"); [cite: 264]
-        return;
-    }
-
-    expiration = keyData.expiry;
-    const now = new Date().getTime();
-    const daysLeft = Math.ceil((expiration - now) / (1000 * 60 * 60 * 24));
-    
-    loginSuccess(daysLeft); [cite: 265]
+    if(key.length > 3) { [cite: 261]
+        document.getElementById('overlay-loader').style.display = 'flex';
+        // Simulasi validasi database
+        setTimeout(() => {
+            let keyData = MOCK_DB[key];
+            if (keyData) {
+                let now = new Date().getTime();
+                let daysLeft = Math.ceil((keyData.expiry - now) / (1000 * 60 * 60 * 24));
+                expiration = keyData.expiry;
+                loginSuccess(daysLeft);
+            } else {
+                showErr("INVALID KEY");
+            }
+        }, 1000); [cite: 262]
+    } else { alert("SILAHKAN MASUKKAN KEY YANG VALID!"); } [cite: 263]
 }
 
-function showErr(msg) { [cite: 264]
+function showErr(msg) {
     document.getElementById('overlay-loader').style.display = 'none';
-    const err = document.getElementById('errMsg');
+    const err = document.getElementById('errMsg'); [cite: 264]
     err.innerText = msg; err.style.display = "block";
 }
 
 function loginSuccess(daysLeft) { [cite: 265-272]
-    const pT = document.getElementById('pct'); 
+    let p = 0;
+    const pT = document.getElementById('pct'); [cite: 265]
     const bF = document.getElementById('bar-f');
     const sT = document.getElementById('st-txt');
     const dayElement = document.getElementById('exp-days'); [cite: 266]
-
-    if(dayElement) dayElement.innerText = daysLeft; [cite: 267]
-    document.getElementById('overlay-loader').style.display = 'flex';
-    sT.innerText = "MENYAMBUNGKAN KE DATABASE MANJII IOS..."; [cite: 268]
-
-    let p = 0;
+    if(dayElement) { dayElement.innerText = daysLeft; } [cite: 267, 268]
+    sT.innerText = "MENYAMBUNGKAN KE DATABASE MANJII IOS...";
     let iv = setInterval(() => { [cite: 269]
-        p += 5; 
-        if(p > 100) p = 100; 
-        pT.innerText = p + "%"; 
-        bF.style.width = p + "%";
-        
+        p += 5; if(p > 100) p = 100; pT.innerText = p + "%"; bF.style.width = p + "%";
         if(p >= 100) {
             clearInterval(iv);
             setTimeout(() => { [cite: 270]
@@ -461,68 +434,55 @@ function loginSuccess(daysLeft) { [cite: 265-272]
     }, 40); [cite: 272]
 }
 
-function showSubDevice(type) { [cite: 273]
+function showSubDevice(type) {
     document.getElementById('initial-choice').style.display = 'none';
-    document.getElementById('sub-device-choice').style.display = 'block';
+    document.getElementById('sub-device-choice').style.display = 'block'; [cite: 273]
 }
 
-function finalizeDevice(name) { [cite: 274]
+function finalizeDevice(name) {
     selectedDeviceName = name;
     document.getElementById('initial-choice').style.display = 'none';
     document.getElementById('sub-device-choice').style.display = 'none';
     document.getElementById('activation-area').style.display = 'block';
-    document.getElementById('chosen-text').innerText = "DEVICE : " + name.toUpperCase();
+    document.getElementById('chosen-text').innerText = "DEVICE : " + name.toUpperCase(); [cite: 274]
 }
 
-function addLog(msg) { [cite: 275, 276]
+function addLog(msg) {
     const container = document.getElementById('log-container');
-    const line = document.createElement('div');
-    line.className = 'log-line';
-    line.innerText = "> " + msg;
+    const line = document.createElement('div'); [cite: 275]
+    line.className = 'log-line'; line.innerText = "> " + msg;
     container.appendChild(line);
-    if(container.childNodes.length > 5) container.removeChild(container.firstChild);
+    if(container.childNodes.length > 5) container.removeChild(container.firstChild); [cite: 276]
 }
 
-function startLogCycle() { [cite: 277, 278]
+function startLogCycle() {
     const logs = ["Syncing bypass...", "Patching hardware...", "Encrypted tunnel OK", "Bypassing anti-cheat...", "Server link stable", "Optimizing memory..."];
-    setInterval(() => {
+    setInterval(() => { [cite: 277]
         addLog(logs[Math.floor(Math.random()*logs.length)]);
-    }, 3000);
+    }, 3000); [cite: 278]
 }
 
 function runInjectorLoading() { [cite: 279-288]
     const ov = document.getElementById('overlay-loader');
     const pT = document.getElementById('pct');
     const bF = document.getElementById('bar-f');
-    const sT = document.getElementById('st-txt');
-    const sp = document.getElementById('spin');
-    const ch = document.getElementById('check-mark');
-    
-    ov.style.display = 'flex'; ch.style.display = 'none'; [cite: 279]
-    sp.style.display = 'block'; pT.style.display = 'block'; [cite: 280]
-    
-    let p = 0;
-    sT.innerText = "HARAP TUNGGU PROSES PENGCONNECT AN DEVICE KE INJECTOR MANJII IOS"; [cite: 281]
+    const sT = document.getElementById('st-txt'); [cite: 279]
+    const sp = document.getElementById('spin'); const ch = document.getElementById('check-mark');
+    ov.style.display = 'flex'; ch.style.display = 'none'; sp.style.display = 'block'; pT.style.display = 'block'; [cite: 280]
+    let p = 0; sT.innerText = "HARAP TUNGGU PROSES PENGCONNECT AN DEVICE KE INJECTOR MANJII IOS"; [cite: 281]
     let iv1 = setInterval(() => { [cite: 282]
-        p += Math.floor(Math.random()*3)+1;
-        if(p > 100) p = 100;
-        pT.innerText = p + "%"; bF.style.width = p + "%";
+        p += Math.floor(Math.random()*3)+1; if(p > 100) p = 100; pT.innerText = p + "%"; bF.style.width = p + "%";
         if(p >= 100) {
             clearInterval(iv1);
-            setTimeout(() => { [cite: 283]
-                p = 0;
-                sT.innerText = "MENGAKTIFKAN INJECTOR MANJII IOS...⏳";
-                let iv2 = setInterval(() => {
-                    p += Math.floor(Math.random()*2)+1;
-                    if(p > 100) p = 100;
-                    pT.innerText = p + "%"; bF.style.width = p + "%"; [cite: 284]
+            setTimeout(() => { p = 0; sT.innerText = "MENGAKTIFKAN INJECTOR MANJII IOS...⏳"; [cite: 283]
+                let iv2 = setInterval(() => { p += Math.floor(Math.random()*2)+1;
+                    if(p > 100) p = 100; pT.innerText = p + "%"; bF.style.width = p + "%"; [cite: 284]
                     if(p >= 100) {
                         clearInterval(iv2);
                         sp.style.display = 'none'; pT.style.display = 'none'; ch.style.display = 'block';
                         speak("INJECTOR MANJII iOS TELAH SUKSES DI AKTIFKAN"); [cite: 285]
-                        setTimeout(() => { [cite: 286]
-                            ov.style.display = 'none';
-                            document.getElementById('device-selection-screen').style.display = 'none';
+                        setTimeout(() => { ov.style.display = 'none';
+                            document.getElementById('device-selection-screen').style.display = 'none'; [cite: 286]
                             document.getElementById('main-app').style.display = 'block';
                             document.getElementById('display-device').innerText = selectedDeviceName.toUpperCase();
                             initTradingChart(); startLogCycle(); [cite: 287]
@@ -534,53 +494,45 @@ function runInjectorLoading() { [cite: 279-288]
     }, 30);
 }
 
-function nav(t, el) { [cite: 289]
+function nav(t, el) {
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('tab-' + t).classList.add('active');
-    el.classList.add('active');
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active')); [cite: 289]
+    document.getElementById('tab-' + t).classList.add('active'); el.classList.add('active');
 }
 
 function load(txt, cb) { [cite: 290-294]
     const ov = document.getElementById('overlay-loader');
-    const pT = document.getElementById('pct');
+    const pT = document.getElementById('pct'); [cite: 290]
     const bF = document.getElementById('bar-f');
     const sT = document.getElementById('st-txt');
-    const sp = document.getElementById('spin');
-    const ch = document.getElementById('check-mark');
+    const sp = document.getElementById('spin'); const ch = document.getElementById('check-mark');
     ov.style.display = 'flex'; ch.style.display = 'none'; sp.style.display = 'block'; [cite: 291]
     pT.style.display = 'block'; sT.innerText = txt;
     let p = 0;
     let iv = setInterval(() => { [cite: 292]
-        p += Math.floor(Math.random()*5)+2;
-        if(p > 100) p = 100;
-        pT.innerText = p + "%"; bF.style.width = p + "%";
-        if(p >= 100) { 
-            clearInterval(iv);
-            sp.style.display = 'none'; pT.style.display = 'none'; ch.style.display = 'block';
+        p += Math.floor(Math.random()*5)+2; if(p > 100) p = 100; pT.innerText = p + "%"; bF.style.width = p + "%";
+        if(p >= 100) { clearInterval(iv); sp.style.display = 'none'; pT.style.display = 'none'; ch.style.display = 'block';
             setTimeout(() => { ov.style.display='none'; cb(); }, 1000); [cite: 293]
         }
     }, 40); [cite: 294]
 }
 
-function syncUID() { [cite: 296, 297]
+function syncUID() {
     let u = document.getElementById('uid-f').value;
-    if(u.length < 5) return alert("UID INVALID");
+    if(u.length < 5) return alert("UID INVALID"); [cite: 295]
     load("SYNCING PLAYER UID TO SERVER...", () => { [cite: 296]
-        addLog("UID " + u + " SYNCED SUCCESS");
-        alert("UID SUCCESSFULY LINKED!");
-    }); [cite: 297]
+        addLog("UID " + u + " SYNCED SUCCESS"); alert("UID SUCCESSFULY LINKED!"); [cite: 297]
+    });
 }
 
-function genSensi() { [cite: 298]
+function genSensi() {
     load("AI CALCULATING OPTIMAL SENSITIVITY...", () => {
         document.querySelectorAll('.val').forEach(v => {
             v.innerText = Math.floor(Math.random()*101) + 100;
             v.style.color = "var(--cyan)";
         });
-        const statusVal = document.getElementById('sens-list').querySelector('b:last-child');
-        statusVal.innerText = "CONNECTED";
-        statusVal.style.color = "var(--green)";
+        const statusVal = document.querySelector('#sens-list span:last-child b');
+        statusVal.innerText = "CONNECTED"; statusVal.style.color = "var(--green)"; [cite: 298]
     });
 }
 
