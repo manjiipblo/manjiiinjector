@@ -1,103 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>MANJII iOS - TRADING ANALYTICS V6</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
 :root {
-    --cyan: #00f2fe; [cite: 13]
-    --purple: #af52de;
-    --neon: linear-gradient(90deg, #00f2fe, #af52de);
-    --bg: #010204; 
-    --glass: rgba(255, 255, 255, 0.03);
-    --border: rgba(255, 255, 255, 0.08); 
-    --green: #00ff88; [cite: 14]
-    --red: #ff3e3e;
+    --cyan: #00f2fe; [cite: 166]
+    --purple: #af52de; [cite: 166]
+    --neon: linear-gradient(90deg, #00f2fe, #af52de); [cite: 166]
+    --bg: #010204; [cite: 166]
+    --glass: rgba(255, 255, 255, 0.03); [cite: 166]
+    --border: rgba(255, 255, 255, 0.08); [cite: 166]
+    --green: #00ff88; [cite: 166]
+    --red: #ff3e3e; [cite: 167]
 }
 * { -webkit-font-smoothing: antialiased; box-sizing: border-box; }
-body { background: var(--bg); color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; [cite: 15]
-margin: 0; padding: 0; overflow: hidden; }
+body { background: var(--bg); color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 0; overflow: hidden; } [cite: 168]
 
-#login-screen, #device-selection-screen { position: fixed; inset: 0; [cite: 16]
-background: var(--bg); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 25px; }
-.login-box { width: 100%; max-width: 320px; [cite: 17]
-background: var(--glass); border: 1px solid var(--border); border-radius: 35px; padding: 40px 30px; backdrop-filter: blur(30px); text-align: center; [cite: 18] }
+/* --- LOGIN & DEVICE SELECTION --- */
+#login-screen, #device-selection-screen { position: fixed; inset: 0; background: var(--bg); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 25px; } [cite: 169]
+.login-box { width: 100%; max-width: 320px; background: var(--glass); border: 1px solid var(--border); border-radius: 35px; padding: 40px 30px; backdrop-filter: blur(30px); text-align: center; } [cite: 170, 171]
+#errMsg { color: var(--red); font-size: 10px; margin-top: 15px; font-family: 'Orbitron'; display: none; } [cite: 264]
 
-.device-option { width: 100%; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 15px; [cite: 19]
-margin-bottom: 10px; color: #fff; font-family: 'Orbitron'; font-size: 12px; cursor: pointer; transition: 0.3s; }
-.device-option:active { background: var(--cyan); color: #000; [cite: 20] }
+.device-option { width: 100%; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 15px; margin-bottom: 10px; color: #fff; font-family: 'Orbitron'; font-size: 12px; cursor: pointer; transition: 0.3s; } [cite: 172]
+.device-option:active { background: var(--cyan); color: #000; } [cite: 173]
 
-.chart-container { width: 100%; height: 150px; background: #05070a; position: relative; border-bottom: 1px solid var(--border); [cite: 21] }
+/* --- TRADING STYLE CHART --- */
+.chart-container { width: 100%; height: 150px; background: #05070a; position: relative; border-bottom: 1px solid var(--border); } [cite: 174]
 #trading-chart { width: 100%; height: 100%; }
-.cpu-tag { position: absolute; top: 15px; left: 15px; font-family: 'Orbitron'; font-size: 8px; color: var(--cyan); [cite: 22]
-letter-spacing: 3px; background: rgba(0,242,254,0.1); padding: 4px 8px; border-radius: 4px; z-index: 10; }
+.cpu-tag { position: absolute; top: 15px; left: 15px; font-family: 'Orbitron'; font-size: 8px; color: var(--cyan); letter-spacing: 3px; background: rgba(0,242,254,0.1); padding: 4px 8px; border-radius: 4px; z-index: 10; } [cite: 175]
 
-.tab-content { display: none; [cite: 23]
-height: calc(100vh - 225px); overflow-y: auto; padding: 15px; padding-bottom: 100px; }
+/* --- TABS SYSTEM --- */
+.tab-content { display: none; height: calc(100vh - 225px); overflow-y: auto; padding: 15px; padding-bottom: 100px; } [cite: 176]
 .tab-content.active { display: block; }
-.navbar { position: fixed; bottom: 0; [cite: 24]
-width: 100%; height: 75px; background: rgba(5,5,5,0.95); backdrop-filter: blur(20px); border-top: 1px solid var(--border); display: flex; justify-content: space-around; align-items: center; z-index: 100; [cite: 25]
-padding: 0 2px; }
+.navbar { position: fixed; bottom: 0; width: 100%; height: 75px; background: rgba(5,5,5,0.95); backdrop-filter: blur(20px); border-top: 1px solid var(--border); display: flex; justify-content: space-around; align-items: center; z-index: 100; padding: 0 2px; } [cite: 177, 178]
 .nav-btn { color: rgba(255,255,255,0.25); font-size: 14px; text-align: center; transition: 0.3s; flex: 1; }
-.nav-btn.active { color: var(--cyan); [cite: 26]
-filter: drop-shadow(0 0 5px var(--cyan)); }
-.nav-btn span { display: block; font-size: 5.5px; font-family: 'Orbitron'; margin-top: 5px; white-space: nowrap; overflow: hidden; [cite: 27] }
+.nav-btn.active { color: var(--cyan); filter: drop-shadow(0 0 5px var(--cyan)); } [cite: 179]
+.nav-btn span { display: block; font-size: 5.5px; font-family: 'Orbitron'; margin-top: 5px; white-space: nowrap; overflow: hidden; } [cite: 180]
 
-.section-label { font-family: 'Orbitron'; font-size: 9px; color: var(--purple); margin: 25px 0 12px 5px; opacity: 0.8; [cite: 28]
-letter-spacing: 1px; }
-.card { background: var(--glass); border: 1px solid var(--border); border-radius: 20px; padding: 18px; margin-bottom: 12px; [cite: 29] }
-
-.log-viewer { background: #000; border: 1px solid var(--border); border-radius: 12px; padding: 10px; font-family: 'monospace'; font-size: 7px; [cite: 30]
-color: var(--green); height: 60px; overflow: hidden; margin-top: 10px; position: relative; }
-.log-line { margin-bottom: 2px; white-space: nowrap; overflow: hidden; [cite: 31] }
+/* --- COMPONENTS --- */
+.section-label { font-family: 'Orbitron'; font-size: 9px; color: var(--purple); margin: 25px 0 12px 5px; opacity: 0.8; letter-spacing: 1px; } [cite: 181]
+.card { background: var(--glass); border: 1px solid var(--border); border-radius: 20px; padding: 18px; margin-bottom: 12px; } [cite: 182]
+.log-viewer { background: #000; border: 1px solid var(--border); border-radius: 12px; padding: 10px; font-family: 'monospace'; font-size: 7px; color: var(--green); height: 60px; overflow: hidden; margin-top: 10px; position: relative; } [cite: 183]
+.log-line { margin-bottom: 2px; white-space: nowrap; overflow: hidden; } [cite: 184]
 
 .injection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-.card-mini { background: var(--glass); [cite: 32]
-border: 1px solid var(--border); border-radius: 18px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; min-height: 90px; [cite: 33] }
+.card-mini { background: var(--glass); border: 1px solid var(--border); border-radius: 18px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; min-height: 90px; } [cite: 185, 186]
 .card-mini .top-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
-.card-mini .title-txt { font-size: 11px; font-weight: 700; line-height: 1.2; [cite: 34] }
+.card-mini .title-txt { font-size: 11px; font-weight: 700; line-height: 1.2; } [cite: 187]
 .card-mini .desc-txt { font-size: 8px; opacity: 0.4; font-weight: 300; margin-top: 4px; line-height: 1.3; }
 
-.btn-main { width: 100%; padding: 16px; [cite: 35]
-background: var(--neon); color: #fff; border: none; border-radius: 15px; font-family: 'Orbitron'; font-weight: 800; cursor: pointer; [cite: 36]
-box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3); }
+.btn-main { width: 100%; padding: 16px; background: var(--neon); color: #fff; border: none; border-radius: 15px; font-family: 'Orbitron'; font-weight: 800; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3); } [cite: 188, 189]
 
-.acc-header { text-align: center; margin-bottom: 25px; [cite: 37]
-padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+/* --- ACCOUNT PAGE --- */
+.acc-header { text-align: center; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid var(--border); } [cite: 190]
 .acc-title { font-family: 'Orbitron'; color: var(--cyan); font-size: 15px; margin-bottom: 8px; }
-.badge { background: var(--green); [cite: 38]
-color: #000; font-size: 9px; font-weight: 800; padding: 4px 12px; border-radius: 50px; }
-.timer-wrap { display: flex; justify-content: space-between; gap: 10px; [cite: 39]
-margin: 20px 0; }
-.t-unit { flex: 1; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 15px; text-align: center; border: 1px solid var(--border); [cite: 40] }
+.badge { background: var(--green); color: #000; font-size: 9px; font-weight: 800; padding: 4px 12px; border-radius: 50px; } [cite: 191]
+.timer-wrap { display: flex; justify-content: space-between; gap: 10px; margin: 20px 0; } [cite: 192]
+.t-unit { flex: 1; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 15px; text-align: center; border: 1px solid var(--border); } [cite: 193]
 .t-unit b { font-family: 'Orbitron'; color: var(--purple); font-size: 18px; display: block; }
-.t-unit label { font-size: 8px; opacity: 0.4; [cite: 41] }
+.t-unit label { font-size: 8px; opacity: 0.4; } [cite: 194]
 
-#overlay-loader { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 10000; display: none; flex-direction: column; align-items: center; [cite: 42]
-justify-content: center; }
+/* --- LOADER --- */
+#overlay-loader { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 10000; display: none; flex-direction: column; align-items: center; justify-content: center; } [cite: 195]
 #pct { font-family: 'Orbitron'; font-size: 35px; color: var(--cyan); }
-.bar-w { width: 180px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 10px; [cite: 43]
-margin-top: 15px; }
+.bar-w { width: 180px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 15px; } [cite: 196]
 #bar-f { width: 0%; height: 100%; background: var(--neon); box-shadow: 0 0 10px var(--cyan); }
-#check-mark { font-size: 60px; [cite: 44]
-color: var(--green); display: none; animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+#check-mark { font-size: 60px; color: var(--green); display: none; animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); } [cite: 197]
+@keyframes pop { from { transform: scale(0); } to { transform: scale(1); } } [cite: 198]
 
-@keyframes pop { from { transform: scale(0); [cite: 45] } to { transform: scale(1); } }
-
-.toggle { width: 34px; height: 16px; background: #222; border-radius: 50px; position: relative; transition: 0.3s; [cite: 46]
-flex-shrink: 0; }
+.toggle { width: 34px; height: 16px; background: #222; border-radius: 50px; position: relative; transition: 0.3s; flex-shrink: 0; } [cite: 199]
 .toggle.active { background: var(--cyan); box-shadow: 0 0 8px var(--cyan); }
-.tg-cir { width: 12px; height: 12px; background: #fff; [cite: 47]
-border-radius: 50%; position: absolute; top: 2px; left: 3px; transition: 0.3s; }
+.tg-cir { width: 12px; height: 12px; background: #fff; border-radius: 50%; position: absolute; top: 2px; left: 3px; transition: 0.3s; } [cite: 200]
 .toggle.active .tg-cir { left: 19px; }
 
-input { width: 100%; [cite: 48]
-padding: 16px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 14px; color: #fff; text-align: center; font-family: 'Orbitron'; margin-bottom: 15px; [cite: 49] }
+input { width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 14px; color: #fff; text-align: center; font-family: 'Orbitron'; margin-bottom: 15px; } [cite: 201, 202]
 
-.game-icon { width: 45px; height: 45px; border-radius: 12px; margin-bottom: 5px; border: 1px solid var(--border); [cite: 50] }
-.cs-btn { position: fixed; bottom: 90px; right: 20px; width: 50px; height: 50px; background: var(--green); border-radius: 50%; display: flex; align-items: center; [cite: 51]
-justify-content: center; color: #000; box-shadow: 0 0 15px var(--green); z-index: 500; [cite: 52] }
+.game-icon { width: 45px; height: 45px; border-radius: 12px; margin-bottom: 5px; border: 1px solid var(--border); } [cite: 203]
+.cs-btn { position: fixed; bottom: 90px; right: 20px; width: 50px; height: 50px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; box-shadow: 0 0 15px var(--green); z-index: 500; } [cite: 204, 205]
 </style>
 </head>
 <body>
@@ -106,24 +89,24 @@ justify-content: center; color: #000; box-shadow: 0 0 15px var(--green); z-index
     <div class="login-box">
         <h1 style="font-family:'Orbitron'; font-size:24px; margin:0; background: var(--neon); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">MANJII <span style="font-weight:300;">iOS</span></h1>
         <p style="font-size:8px; letter-spacing:4px; opacity:0.4; margin-bottom:30px;">PREMIUM INJECTOR MANJII iOS</p>
-         <input type="text" id="key-input" placeholder="ENTER LICENSE KEY">
+        <input type="text" id="key-input" placeholder="ENTER LICENSE KEY">
         <button class="btn-main" onclick="handleLogin()">ACTIVATE INJECTOR</button>
-        <div id="errMsg" style="color:var(--red); font-size:10px; margin-top:10px; display:none;"></div>
+        <div id="errMsg"></div>
     </div>
 </div>
 
 <div id="device-selection-screen" style="display:none;">
     <div class="login-box">
         <h2 style="font-family:'Orbitron'; font-size:14px; color:var(--cyan); margin-bottom:20px;">PILIH PERANGKAT</h2>
-        <div id="initial-choice">
-            <div class="device-option" onclick="showSubDevice('handphone')">1. HANDPHONE</div> [cite: 54]
-            <div class="device-option" onclick="finalizeDevice('Emulator')">2. EMULATOR</div> [cite: 55]
+        <div id="initial-choice"> [cite: 206]
+            <div class="device-option" onclick="showSubDevice('handphone')">1. HANDPHONE</div> [cite: 207]
+            <div class="device-option" onclick="finalizeDevice('Emulator')">2. EMULATOR</div> [cite: 208]
         </div>
         <div id="sub-device-choice" style="display:none;">
             <div class="device-option" onclick="finalizeDevice('Android')">ANDROID</div>
             <div class="device-option" onclick="finalizeDevice('iPhone')">IPHONE</div>
         </div>
-        <div id="activation-area" style="display:none;">
+        <div id="activation-area" style="display:none;"> [cite: 209]
             <p id="chosen-text" style="font-size:10px; opacity:0.6; margin-bottom:15px;"></p>
             <button class="btn-main" onclick="runInjectorLoading()">AKTIFKAN INJECTOR</button>
         </div>
@@ -137,9 +120,9 @@ justify-content: center; color: #000; box-shadow: 0 0 15px var(--green); z-index
     </div>
 
     <div id="tab-home" class="tab-content active">
-        <div style="background: rgba(0,242,254,0.05); padding: 10px; border-radius: 15px; margin-bottom: 15px; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;"> [cite: 57]
-            <span style="font-family:'Orbitron'; font-size:9px; opacity:0.5;">DEVICE :</span> [cite: 58]
-            <span id="display-device" style="font-family:'Orbitron'; font-size:9px; color:var(--cyan);">NONE</span> [cite: 59]
+        <div style="background: rgba(0,242,254,0.05); padding: 10px; border-radius: 15px; margin-bottom: 15px; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;"> [cite: 210]
+            <span style="font-family:'Orbitron'; font-size:9px; opacity:0.5;">DEVICE :</span> [cite: 211]
+            <span id="display-device" style="font-family:'Orbitron'; font-size:9px; color:var(--cyan);">NONE</span> [cite: 212]
         </div>
 
         <div class="section-label">SERVER STATUS LOGS</div>
@@ -150,46 +133,46 @@ justify-content: center; color: #000; box-shadow: 0 0 15px var(--green); z-index
         <div class="section-label">MANJII INJECTION MENU</div>
         <div class="injection-grid">
             <div class="card-mini" onclick="toggleMenu('m1', 'Headtrick')">
-                <div class="top-row"><div class="title-txt">Headtrick</div><div class="toggle" id="m1"><div class="tg-cir"></div></div></div> [cite: 60]
+                <div class="top-row"><div class="title-txt">Headtrick</div><div class="toggle" id="m1"><div class="tg-cir"></div></div></div> [cite: 213]
                 <div class="desc-txt">Meningkatkan rasio tembakan tepat di kepala.</div>
             </div>
             <div class="card-mini" onclick="toggleMenu('m2', 'Aim Assist')">
                 <div class="top-row"><div class="title-txt">Aim Assist</div><div class="toggle" id="m2"><div class="tg-cir"></div></div></div>
-                <div class="desc-txt">Bantuan tarikan aim otomatis ke arah musuh.</div> [cite: 61]
+                <div class="desc-txt">Bantuan tarikan aim otomatis ke arah musuh.</div> [cite: 214]
             </div>
             <div class="card-mini" onclick="toggleMenu('m3', 'Aim Trick')">
                 <div class="top-row"><div class="title-txt">Aim Trick</div><div class="toggle" id="m3"><div class="tg-cir"></div></div></div>
                 <div class="desc-txt">Optimasi penguncian target saat bergerak.</div>
             </div>
-            <div class="card-mini" onclick="toggleMenu('m4', 'Aim Optimize')"> [cite: 62]
+            <div class="card-mini" onclick="toggleMenu('m4', 'Aim Optimize')"> [cite: 215]
                 <div class="top-row"><div class="title-txt">Aim Optimize</div><div class="toggle" id="m4"><div class="tg-cir"></div></div></div>
                 <div class="desc-txt">Menghaluskan pergerakan crosshair AI.</div>
             </div>
             <div class="card-mini" onclick="toggleMenu('m5', 'Aim Precision')">
                 <div class="top-row"><div class="title-txt">Aim Precision</div><div class="toggle" id="m5"><div class="tg-cir"></div></div></div>
-                <div class="desc-txt">Akurasi maksimal pada jarak sangat jauh.</div> [cite: 63]
+                <div class="desc-txt">Akurasi maksimal pada jarak sangat jauh.</div> [cite: 216]
             </div>
             <div class="card-mini" onclick="toggleMenu('m6', 'Recoil Control')">
                 <div class="top-row"><div class="title-txt">Recoil Control</div><div class="toggle" id="m6"><div class="tg-cir"></div></div></div>
-                <div class="desc-txt">Menghilangkan hentakan senjata saat spray.</div> [cite: 64]
+                <div class="desc-txt">Menghilangkan hentakan senjata saat spray.</div> [cite: 217]
             </div>
         </div>
 
         <div class="section-label">UID SINKRONISASI</div>
         <div class="card" style="display:block;">
-            <p style="font-size:9px; opacity:0.5; margin-bottom:10px;">Masukan UID Free Fire untuk verifikasi koneksi server.</p> [cite: 65]
+            <p style="font-size:9px; opacity:0.5; margin-bottom:10px;">Masukan UID Free Fire untuk verifikasi koneksi server.</p> [cite: 218]
             <input type="number" id="uid-f" placeholder="ENTER UID PLAYER">
             <button class="btn-main" onclick="syncUID()">VERIFY UID</button>
         </div>
 
-        <div style="display:flex; justify-content:center; gap:40px; margin:20px 0;"> [cite: 66]
+        <div style="display:flex; justify-content:center; gap:40px; margin:20px 0;"> [cite: 219]
             <div style="text-align:center;">
                 <img src="https://i.ibb.co/LhqZzX6/ff.png" class="game-icon" alt="FF"><br>
-                <span style="font-size:8px; opacity:0.5;">FREE FIRE</span> [cite: 67]
+                <span style="font-size:8px; opacity:0.5;">FREE FIRE</span> [cite: 220]
             </div>
             <div style="text-align:center;">
                 <img src="https://i.ibb.co/LhqZzX6/ff.png" class="game-icon" style="filter: hue-rotate(45deg);" alt="FF MAX"><br>
-                <span style="font-size:8px; opacity:0.5;">FF MAX</span> [cite: 68]
+                <span style="font-size:8px; opacity:0.5;">FF MAX</span> [cite: 221]
             </div>
         </div>
     </div>
@@ -199,35 +182,35 @@ justify-content: center; color: #000; box-shadow: 0 0 15px var(--green); z-index
         <div class="injection-grid">
             <div class="card-mini" onclick="toggleMenu('c1', 'Smooth Drag')">
                 <div class="top-row"><div class="title-txt">Smooth Drag</div><div class="toggle" id="c1"><div class="tg-cir"></div></div></div>
-                <div class="desc-txt">Pergerakan drag shot lebih halus.</div> [cite: 69]
+                <div class="desc-txt">Pergerakan drag shot lebih halus.</div> [cite: 222]
             </div>
             <div class="card-mini" onclick="toggleMenu('c2', 'Easy Drag')">
                 <div class="top-row"><div class="title-txt">Easy Drag</div><div class="toggle" id="c2"><div class="tg-cir"></div></div></div>
                 <div class="desc-txt">Mempermudah tarikan tombol tembak.</div>
             </div>
-            <div class="card-mini" onclick="toggleMenu('c3', 'Smooth Aim')"> [cite: 70]
+            <div class="card-mini" onclick="toggleMenu('c3', 'Smooth Aim')"> [cite: 223]
                 <div class="top-row"><div class="title-txt">Smooth Aim</div><div class="toggle" id="c3"><div class="tg-cir"></div></div></div>
                 <div class="desc-txt">Penguncian target tanpa getaran.</div>
             </div>
             <div class="card-mini" onclick="toggleMenu('c4', 'Rapid Fire')">
                 <div class="top-row"><div class="title-txt">Rapid Fire</div><div class="toggle" id="c4"><div class="tg-cir"></div></div></div>
-                <div class="desc-txt">Meningkatkan kecepatan peluru keluar.</div> [cite: 71]
+                <div class="desc-txt">Meningkatkan kecepatan peluru keluar.</div> [cite: 224]
             </div>
-            <div class="card-mini" onclick="toggleMenu('c5', 'Long Hit')">
+            <div class="card-mini" onclick="toggleMenu('c5', 'Long Hit')"> [cite: 225]
                 <div class="top-row"><div class="title-txt">Long Hit</div><div class="toggle" id="c5"><div class="tg-cir"></div></div></div>
-                <div class="desc-txt">Stabilisasi damage jarak jauh.</div> [cite: 72]
+                <div class="desc-txt">Stabilisasi damage jarak jauh.</div>
             </div>
             <div class="card-mini" onclick="toggleMenu('c6', 'Fast Hit')">
                 <div class="top-row"><div class="title-txt">Fast Hit</div><div class="toggle" id="c6"><div class="tg-cir"></div></div></div>
                 <div class="desc-txt">Respon damage tembakan lebih instan.</div>
             </div>
             <div class="card-mini" onclick="toggleMenu('c7', 'Bullet Track')">
-                <div class="top-row"><div class="title-txt">Bullet Track</div><div class="toggle" id="c7"><div class="tg-cir"></div></div></div> [cite: 73]
+                <div class="top-row"><div class="title-txt">Bullet Track</div><div class="toggle" id="c7"><div class="tg-cir"></div></div></div> [cite: 226]
                 <div class="desc-txt">Peluru mengikuti pergerakan musuh.</div>
             </div>
             <div class="card-mini" onclick="toggleMenu('c8', 'Quick Scope')">
                 <div class="top-row"><div class="title-txt">Quick Scope</div><div class="toggle" id="c8"><div class="tg-cir"></div></div></div>
-                <div class="desc-txt">Kecepatan buka scope kilat.</div> [cite: 74]
+                <div class="desc-txt">Kecepatan buka scope kilat.</div> [cite: 227]
             </div>
         </div>
     </div>
@@ -235,15 +218,15 @@ justify-content: center; color: #000; box-shadow: 0 0 15px var(--green); z-index
     <div id="tab-sensi" class="tab-content">
         <div class="section-label">SENSI AI GENERATOR</div>
         <div class="card" style="border: 1px solid var(--cyan);">
-            <div id="sens-list" style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:10px; margin-bottom:15px;"> [cite: 75]
+            <div id="sens-list" style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:10px; margin-bottom:15px;"> [cite: 228]
                 <span>1. Sekeliling: <b class="val">-</b></span><span>2. Red Dot: <b class="val">-</b></span>
                 <span>3. 2x Scope: <b class="val">-</b></span><span>4. 4x Scope: <b class="val">-</b></span>
                 <span>5. Sniper: <b class="val">-</b></span><span>6. Kamera: <b class="val">-</b></span>
-                <span>7. Tembak: <b class="val">-</b></span><span>8. Status: <b class="val" style="color:var(--red)">✖</b></span> [cite: 76]
+                <span>7. Tembak: <b class="val">-</b></span><span>8. Status: <b class="val" style="color:var(--red)">❌</b></span> [cite: 229]
             </div>
-            <button class="btn-main" style="padding:10px; font-size:10px;" onclick="genSensi()">GENERATE BEST SENSI AI MANJII</button> [cite: 77]
+            <button class="btn-main" style="padding:10px; font-size:10px;" onclick="genSensi()">GENERATE BEST SENSI AI MANJII</button> [cite: 230]
         </div>
-        <p style="font-size:8px; opacity:0.4; text-align:center; margin-top:10px;">*AI akan menghitung sensitivitas terbaik berdasarkan chipset perangkat anda.</p> [cite: 78]
+        <p style="font-size:8px; opacity:0.4; text-align:center; margin-top:10px;">*AI akan menghitung sensitivitas terbaik berdasarkan chipset perangkat anda.</p> [cite: 231]
     </div>
 
     <div id="tab-hardware" class="tab-content">
@@ -251,42 +234,42 @@ justify-content: center; color: #000; box-shadow: 0 0 15px var(--green); z-index
         <div class="injection-grid">
             <div class="card-mini" onclick="toggleMenu('h1', 'Ram Defrag')">
                 <div class="top-row"><div class="title-txt">Ram Defrag</div><div class="toggle" id="h1"><div class="tg-cir"></div></div></div>
-                <div class="desc-txt">Menata ulang memori sistem lebih efisien.</div> [cite: 79]
+                <div class="desc-txt">Menata ulang memori sistem lebih efisien.</div> [cite: 232]
             </div>
             <div class="card-mini" onclick="toggleMenu('h2', 'CPU Core')">
                 <div class="top-row"><div class="title-txt">CPU Core</div><div class="toggle" id="h2"><div class="tg-cir"></div></div></div>
                 <div class="desc-txt">Aktivasi inti prosesor ke performa puncak.</div>
             </div>
-            <div class="card-mini" onclick="toggleMenu('h3', 'Touch Latency')">
-                <div class="top-row"><div class="title-txt">Touch Latency</div><div class="toggle" id="h3"><div class="tg-cir"></div></div></div> [cite: 80]
+            <div class="card-mini" onclick="toggleMenu('h3', 'Touch Latency')"> [cite: 233]
+                <div class="top-row"><div class="title-txt">Touch Latency</div><div class="toggle" id="h3"><div class="tg-cir"></div></div></div>
                 <div class="desc-txt">Mempercepat respon sentuhan layar.</div>
             </div>
             <div class="card-mini" onclick="toggleMenu('h4', 'Disk Speed')">
-                <div class="top-row"><div class="title-txt">Disk Speed</div><div class="toggle" id="h4"><div class="tg-cir"></div></div></div>
-                <div class="desc-txt">Optimasi kecepatan baca tulis penyimpanan.</div> [cite: 81]
+                <div class="top-row"><div class="title-txt">Disk Speed</div><div class="toggle" id="h4"><div class="tg-cir"></div></div></div> [cite: 234]
+                <div class="desc-txt">Optimasi kecepatan baca tulis penyimpanan.</div>
             </div>
             <div class="card-mini" onclick="toggleMenu('h5', 'GPUs Boost')">
                 <div class="top-row"><div class="title-txt">GPUs Boost</div><div class="toggle" id="h5"><div class="tg-cir"></div></div></div>
                 <div class="desc-txt">Mendorong render grafis ke level maksimal.</div>
             </div>
-            <div class="card-mini" onclick="toggleMenu('h6', 'Ping Fixer')"> [cite: 82]
+            <div class="card-mini" onclick="toggleMenu('h6', 'Ping Fixer')"> [cite: 235]
                 <div class="top-row"><div class="title-txt">Ping Fixer</div><div class="toggle" id="h6"><div class="tg-cir"></div></div></div>
                 <div class="desc-txt">Menstabilkan paket data jaringan internet.</div>
             </div>
             <div class="card-mini" onclick="toggleMenu('h7', 'Zero Lag')">
-                <div class="top-row"><div class="title-txt">Zero Lag</div><div class="toggle" id="h7"><div class="tg-cir"></div></div></div> [cite: 83]
+                <div class="top-row"><div class="title-txt">Zero Lag</div><div class="toggle" id="h7"><div class="tg-cir"></div></div></div> [cite: 236]
                 <div class="desc-txt">Menghilangkan stuttering saat gameplay berat.</div>
             </div>
             <div class="card-mini" onclick="toggleMenu('h8', 'Battery Opt')">
                 <div class="top-row"><div class="title-txt">Battery Opt</div><div class="toggle" id="h8"><div class="tg-cir"></div></div></div>
-                <div class="desc-txt">Menjaga suhu baterai tetap stabil & awet.</div> [cite: 84]
+                <div class="desc-txt">Menjaga suhu baterai tetap stabil & awet.</div> [cite: 237]
             </div>
             <div class="card-mini" onclick="toggleMenu('h9', 'Thermal Cool')">
                 <div class="top-row"><div class="title-txt">Thermal Cool</div><div class="toggle" id="h9"><div class="tg-cir"></div></div></div>
                 <div class="desc-txt">Mendinginkan chipset secara virtual sistem.</div>
             </div>
-            <div class="card-mini" onclick="toggleMenu('h10', 'Resolution+')"> [cite: 85]
-              <div class="top-row"><div class="title-txt">Resolution+</div><div class="toggle" id="h10"><div class="tg-cir"></div></div></div>
+            <div class="card-mini" onclick="toggleMenu('h10', 'Resolution+')"> [cite: 238]
+                <div class="top-row"><div class="title-txt">Resolution+</div><div class="toggle" id="h10"><div class="tg-cir"></div></div></div>
                 <div class="desc-txt">Meningkatkan ketajaman pixel pada layar.</div>
             </div>
         </div>
@@ -295,29 +278,29 @@ justify-content: center; color: #000; box-shadow: 0 0 15px var(--green); z-index
     <div id="tab-security" class="tab-content">
         <div class="section-label">SECURITY PATCH</div>
         <div class="injection-grid">
-            <div class="card-mini" onclick="toggleMenu('s1', 'Anti-Banned Manjii')"> [cite: 86]
+            <div class="card-mini" onclick="toggleMenu('s1', 'Anti-Banned Manjii')"> [cite: 239]
                 <div class="top-row"><div class="title-txt">Anti-Banned</div><div class="toggle" id="s1"><div class="tg-cir"></div></div></div>
                 <div class="desc-txt">Perlindungan enkripsi paket data server.</div>
             </div>
             <div class="card-mini" onclick="toggleMenu('s2', 'Anti-Blacklist Manjii')">
                 <div class="top-row"><div class="title-txt">Anti-Blacklist</div><div class="toggle" id="s2"><div class="tg-cir"></div></div></div>
-                <div class="desc-txt">Mencegah ID masuk ke daftar pantauan.</div> [cite: 87]
+                <div class="desc-txt">Mencegah ID masuk ke daftar pantauan.</div> [cite: 240]
             </div>
             <div class="card-mini" onclick="toggleMenu('s3', 'Anti-SC Manjii')">
                 <div class="top-row"><div class="title-txt">Anti-SC</div><div class="toggle" id="s3"><div class="tg-cir"></div></div></div>
                 <div class="desc-txt">Proteksi script dari deteksi in-game.</div>
             </div>
-            <div class="card-mini" onclick="toggleMenu('s4', 'Log Eraser')"> [cite: 88]
+            <div class="card-mini" onclick="toggleMenu('s4', 'Log Eraser')"> [cite: 241]
                 <div class="top-row"><div class="title-txt">Log Eraser</div><div class="toggle" id="s4"><div class="tg-cir"></div></div></div>
                 <div class="desc-txt">Menghapus riwayat jejak modifikasi.</div>
             </div>
-            <div class="card-mini" onclick="toggleMenu('s5', 'Web Stealth')"> [cite: 89]
+            <div class="card-mini" onclick="toggleMenu('s5', 'Web Stealth')"> [cite: 242]
                 <div class="top-row"><div class="title-txt">Web Stealth</div><div class="toggle" id="s5"><div class="tg-cir"></div></div></div>
                 <div class="desc-txt">Menyembunyikan aktivitas trafik jaringan.</div>
             </div>
             <div class="card-mini" onclick="toggleMenu('s6', 'HWID Masker')">
                 <div class="top-row"><div class="title-txt">HWID Masker</div><div class="toggle" id="s6"><div class="tg-cir"></div></div></div>
-                <div class="desc-txt">Menyamarkan identitas hardware perangkat.</div> [cite: 90]
+                <div class="desc-txt">Menyamarkan identitas hardware perangkat.</div> [cite: 243]
             </div>
         </div>
     </div>
@@ -325,15 +308,15 @@ justify-content: center; color: #000; box-shadow: 0 0 15px var(--green); z-index
     <div id="tab-account" class="tab-content">
         <div class="card">
             <div class="acc-header">
-                <div style="font-size:9px; opacity:0.5; margin-bottom:10px;">VIP ACCESS MANJII INJECTOR</div> [cite: 91]
+                <div style="font-size:9px; opacity:0.5; margin-bottom:10px;">VIP ACCESS MANJII INJECTOR</div> [cite: 244]
                 <div class="acc-title">MANJIIVIP-2026</div>
                 <div class="badge">STATUS KEY: AKTIF ✅</div>
             </div>
             
-            <div style="text-align: center; margin-top: -10px; margin-bottom: 15px;"> [cite: 92]
-                <p style="font-size: 8px; opacity: 0.5; margin-bottom: 4px; font-family: 'Orbitron';">CREATED DATE</p> [cite: 93]
-                <div style="font-size: 11px; color: var(--cyan); font-weight: 700; background: rgba(0, 242, 254, 0.05); padding: 5px 15px; border-radius: 10px; display: inline-block; border: 1px solid var(--border);"> [cite: 94, 95]
-                   2026-03-25 <span style="opacity:0.3; margin:0 5px;">|</span> MANJII iOS [cite: 96]
+            <div style="text-align: center; margin-top: -10px; margin-bottom: 15px;"> [cite: 245]
+                <p style="font-size: 8px; opacity: 0.5; margin-bottom: 4px; font-family: 'Orbitron';">CREATED DATE</p> [cite: 246]
+                <div style="font-size: 11px; color: var(--cyan); font-weight: 700; background: rgba(0, 242, 254, 0.05); padding: 5px 15px; border-radius: 10px; display: inline-block; border: 1px solid var(--border);"> [cite: 247, 248]
+                   2026-03-25 <span style="opacity:0.3; margin:0 5px;">|</span> MANJII iOS [cite: 249]
                 </div>
             </div>
 
@@ -341,7 +324,7 @@ justify-content: center; color: #000; box-shadow: 0 0 15px var(--green); z-index
                 <div class="t-unit"><b id="exp-days">0</b><label>Day</label></div>
             </div>
         </div>
-        <p style="text-align:center; font-size:9px; opacity:0.4; margin-top:20px;">Injector ini telah dirilis oleh MANJII iOS. Hak cipta © 2026.</p> [cite: 97]
+        <p style="text-align:center; font-size:9px; opacity:0.4; margin-top:20px;">Injector ini telah dirilis oleh MANJII iOS. Hak cipta © 2026.</p> [cite: 250]
     </div>
 
     <div class="navbar">
@@ -350,62 +333,31 @@ justify-content: center; color: #000; box-shadow: 0 0 15px var(--green); z-index
         <div class="nav-btn" onclick="nav('sensi', this)"><i class="fas fa-bullseye"></i><span>SENSI</span></div>
         <div class="nav-btn" onclick="nav('hardware', this)"><i class="fas fa-bolt"></i><span>HARDWARE</span></div>
         <div class="nav-btn" onclick="nav('security', this)"><i class="fas fa-shield-alt"></i><span>SECURITY</span></div>
-        <div class="nav-btn" onclick="nav('account', this)"><i class="fas fa-user-shield"></i><span>ACCOUNT</span></div> [cite: 98]
+        <div class="nav-btn" onclick="nav('account', this)"><i class="fas fa-user-shield"></i><span>ACCOUNT</span></div> [cite: 251]
     </div>
 </div>
 
 <a href="https://wa.me/6283845203074" class="cs-btn"><i class="fab fa-whatsapp"></i></a>
 
 <div id="overlay-loader">
-    <div id="spin" class="fa-spin" style="font-size:40px; color:var(--cyan);"><i class="fas fa-circle-notch"></i></div> [cite: 99]
+    <div id="spin" class="fa-spin" style="font-size:40px; color:var(--cyan);"><i class="fas fa-circle-notch"></i></div> [cite: 252]
     <div id="pct">0%</div>
     <div id="check-mark"><i class="fas fa-check-circle"></i></div>
     <div class="bar-w"><div id="bar-f"></div></div>
-    <p id="st-txt" style="font-size:9px; margin-top:20px; text-align:center; letter-spacing:3px; opacity:0.5; color:var(--cyan);">INITIALIZING...</p> [cite: 100]
+    <p id="st-txt" style="font-size:9px; margin-top:20px; text-align:center; letter-spacing:3px; opacity:0.5; color:var(--cyan);">INITIALIZING...</p> [cite: 253]
 </div>
 
 <script>
-// --- LOCAL DATABASE MOCKUP ---
-// Karena di web tidak ada manjii_v2.json asli, kita menggunakan localStorage untuk simulasi database
-if (!localStorage.getItem("manjii_db")) {
-    const initialDb = {
-        "MANJII-VIP-DEMO": { expiry: new Date().getTime() + (30 * 24 * 60 * 60 * 1000), status: "ACTIVE", deviceId: "" }
-    };
-    localStorage.setItem("manjii_db", JSON.stringify(initialDb));
-}
-
-let selectedDeviceName = "";
-let expirationTime = 0;
-
-// Fungsi mendapatkan HWID unik via Web (Browser Fingerprint Sederhana)
-const getHWID = () => {
-    return navigator.userAgent.replace(/\s/g, '-') + "-" + screen.width + "x" + screen.height;
+// SIMULASI DATABASE KEY (Bisa diisi manual atau lewat API nantinya)
+const MOCK_DB = {
+    "MANJII-FREE": { status: "ACTIVE", expiry: new Date().getTime() + (7 * 24 * 60 * 60 * 1000) },
+    "MANJII-PRO": { status: "ACTIVE", expiry: new Date().getTime() + (30 * 24 * 60 * 60 * 1000) }
 };
 
-// Logika Validasi License Key (Pindahan dari processLogin Scriptable)
-function validateKey(inputKey) {
-    let db = JSON.parse(localStorage.getItem("manjii_db") || "{}");
-    let keyData = db[inputKey];
-    let myID = getHWID();
+let expiration = 0;
+let selectedDeviceName = "";
 
-    if (!keyData) return "INVALID KEY";
-    if (keyData.status === "BANNED") return "KEY DI BANNED OLEH DEVELOPER MANJII IOS"; [cite: 6]
-    
-    let now = new Date().getTime();
-    if (now > keyData.expiry) return "KEY SUDAH EXPIRED"; [cite: 7]
-
-    if (keyData.deviceId === null || keyData.deviceId === "") {
-        keyData.deviceId = myID;
-        db[inputKey] = keyData;
-        localStorage.setItem("manjii_db", JSON.stringify(db));
-        return "SUCCESS";
-    } else if (keyData.deviceId !== myID) {
-        return "KEY TELAH DIGUNAKAN DI PERANGKAT LAIN"; [cite: 10]
-    }
-    return "SUCCESS";
-}
-
-// LOGIKA CHART CPU [cite: 101]
+// LOGIKA CHART CPU [cite: 254-260]
 let cpuData = Array(30).fill(20); 
 function initTradingChart() {
     const canvas = document.getElementById('trading-chart');
@@ -417,7 +369,7 @@ function initTradingChart() {
         canvas.height = canvas.offsetHeight;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        const lastVal = cpuData[cpuData.length - 1]; [cite: 101]
+        const lastVal = cpuData[cpuData.length - 1]; [cite: 254]
         const newVal = Math.max(10, Math.min(90, lastVal + (Math.random() * 10 - 5)));
         cpuData.push(newVal);
         cpuData.shift();
@@ -426,73 +378,72 @@ function initTradingChart() {
         ctx.beginPath();
         ctx.strokeStyle = '#00f2fe';
         ctx.lineWidth = 2;
-        ctx.lineJoin = 'round'; [cite: 102]
+        ctx.lineJoin = 'round'; [cite: 255]
         ctx.shadowBlur = 10;
-        ctx.shadowColor = '#00f2fe'; [cite: 103]
-        const step = canvas.width / (cpuData.length - 1);
+        ctx.shadowColor = '#00f2fe';
+        const step = canvas.width / (cpuData.length - 1); [cite: 256]
         cpuData.forEach((val, i) => {
             const x = i * step;
             const y = canvas.height - (val / 100 * canvas.height);
             if(i === 0) ctx.moveTo(x, y);
             else ctx.lineTo(x, y);
         });
-        ctx.stroke(); [cite: 104]
+        ctx.stroke(); [cite: 257]
 
         ctx.lineTo(canvas.width, canvas.height);
         ctx.lineTo(0, canvas.height);
         const grad = ctx.createLinearGradient(0,0,0, canvas.height);
-        grad.addColorStop(0, 'rgba(0, 242, 254, 0.2)'); [cite: 105]
+        grad.addColorStop(0, 'rgba(0, 242, 254, 0.2)'); [cite: 258]
         grad.addColorStop(1, 'transparent');
         ctx.fillStyle = grad;
         ctx.fill();
 
-        setTimeout(() => requestAnimationFrame(draw), 200); [cite: 106]
+        setTimeout(() => requestAnimationFrame(draw), 200); [cite: 259]
     }
-    draw(); [cite: 107]
+    draw(); [cite: 260]
 }
 
-function handleLogin() {
+function handleLogin() { [cite: 261-263]
     const key = document.getElementById('key-input').value;
     const err = document.getElementById('errMsg');
     
-    if(key.length > 3) { [cite: 108]
-        err.style.display = "none";
-        document.getElementById('overlay-loader').style.display = 'flex'; [cite: 109]
-        
-        // Proses validasi internal web
-        setTimeout(() => {
-            let res = validateKey(key);
-            if (res === "SUCCESS") {
-                let db = JSON.parse(localStorage.getItem("manjii_db"));
-                let expiryTime = db[key].expiry;
-                expirationTime = expiryTime;
-                let diffInMs = expiryTime - new Date().getTime();
-                let daysLeft = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
-                loginSuccess(daysLeft);
-            } else {
-                showErr(res);
-            }
-        }, 1500);
-    } else { alert("SILAHKAN MASUKKAN KEY YANG VALID!"); } [cite: 110]
+    if(key.length < 4) { [cite: 263]
+        alert("SILAHKAN MASUKKAN KEY YANG VALID!");
+        return;
+    }
+
+    // Cek di Mock DB
+    const keyData = MOCK_DB[key];
+    if (!keyData) {
+        showErr("INVALID KEY"); [cite: 264]
+        return;
+    }
+
+    expiration = keyData.expiry;
+    const now = new Date().getTime();
+    const daysLeft = Math.ceil((expiration - now) / (1000 * 60 * 60 * 24));
+    
+    loginSuccess(daysLeft); [cite: 265]
 }
 
-function showErr(msg) {
+function showErr(msg) { [cite: 264]
     document.getElementById('overlay-loader').style.display = 'none';
-    const err = document.getElementById('errMsg'); [cite: 111]
+    const err = document.getElementById('errMsg');
     err.innerText = msg; err.style.display = "block";
 }
 
-function loginSuccess(daysLeft) {
-    let p = 0;
-    const pT = document.getElementById('pct'); [cite: 112]
+function loginSuccess(daysLeft) { [cite: 265-272]
+    const pT = document.getElementById('pct'); 
     const bF = document.getElementById('bar-f');
     const sT = document.getElementById('st-txt');
-    const dayElement = document.getElementById('exp-days'); [cite: 113]
+    const dayElement = document.getElementById('exp-days'); [cite: 266]
 
-    if(dayElement) { dayElement.innerText = daysLeft; } [cite: 114, 115]
+    if(dayElement) dayElement.innerText = daysLeft; [cite: 267]
+    document.getElementById('overlay-loader').style.display = 'flex';
+    sT.innerText = "MENYAMBUNGKAN KE DATABASE MANJII IOS..."; [cite: 268]
 
-    sT.innerText = "MENYAMBUNGKAN KE DATABASE MANJII IOS..."; [cite: 116]
-    let iv = setInterval(() => {
+    let p = 0;
+    let iv = setInterval(() => { [cite: 269]
         p += 5; 
         if(p > 100) p = 100; 
         pT.innerText = p + "%"; 
@@ -500,174 +451,154 @@ function loginSuccess(daysLeft) {
         
         if(p >= 100) {
             clearInterval(iv);
-            setTimeout(() => { [cite: 117]
+            setTimeout(() => { [cite: 270]
                 document.getElementById('overlay-loader').style.display = 'none';
                 document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('device-selection-screen').style.display = 'flex'; [cite: 118]
-                speak("Login berhasil. sisa masa aktif anda " + daysLeft + " hari");
+                document.getElementById('device-selection-screen').style.display = 'flex';
+                speak("Login berhasil. sisa masa aktif anda " + daysLeft + " hari"); [cite: 271]
             }, 800);
         }
-    }, 40); [cite: 119]
+    }, 40); [cite: 272]
 }
 
-function showSubDevice(type) {
+function showSubDevice(type) { [cite: 273]
     document.getElementById('initial-choice').style.display = 'none';
-    document.getElementById('sub-device-choice').style.display = 'block'; [cite: 120]
+    document.getElementById('sub-device-choice').style.display = 'block';
 }
 
-function finalizeDevice(name) {
+function finalizeDevice(name) { [cite: 274]
     selectedDeviceName = name;
     document.getElementById('initial-choice').style.display = 'none';
     document.getElementById('sub-device-choice').style.display = 'none';
-    document.getElementById('activation-area').style.display = 'block'; [cite: 121]
+    document.getElementById('activation-area').style.display = 'block';
     document.getElementById('chosen-text').innerText = "DEVICE : " + name.toUpperCase();
 }
 
-function addLog(msg) {
-    const container = document.getElementById('log-container'); [cite: 122]
+function addLog(msg) { [cite: 275, 276]
+    const container = document.getElementById('log-container');
     const line = document.createElement('div');
     line.className = 'log-line';
     line.innerText = "> " + msg;
     container.appendChild(line);
-    if(container.childNodes.length > 5) container.removeChild(container.firstChild); [cite: 123]
+    if(container.childNodes.length > 5) container.removeChild(container.firstChild);
 }
 
-function startLogCycle() {
+function startLogCycle() { [cite: 277, 278]
     const logs = ["Syncing bypass...", "Patching hardware...", "Encrypted tunnel OK", "Bypassing anti-cheat...", "Server link stable", "Optimizing memory..."];
-    setInterval(() => { [cite: 124]
+    setInterval(() => {
         addLog(logs[Math.floor(Math.random()*logs.length)]);
-    }, 3000); [cite: 125]
+    }, 3000);
 }
 
-function runInjectorLoading() {
+function runInjectorLoading() { [cite: 279-288]
     const ov = document.getElementById('overlay-loader');
     const pT = document.getElementById('pct');
-    const bF = document.getElementById('bar-f'); [cite: 126]
+    const bF = document.getElementById('bar-f');
     const sT = document.getElementById('st-txt');
     const sp = document.getElementById('spin');
     const ch = document.getElementById('check-mark');
     
-    ov.style.display = 'flex'; ch.style.display = 'none'; [cite: 127]
-    sp.style.display = 'block'; pT.style.display = 'block';
+    ov.style.display = 'flex'; ch.style.display = 'none'; [cite: 279]
+    sp.style.display = 'block'; pT.style.display = 'block'; [cite: 280]
     
     let p = 0;
-    sT.innerText = "HARAP TUNGGU PROSES PENGCONNECT AN DEVICE KE INJECTOR MANJII IOS"; [cite: 128, 129]
-    let iv1 = setInterval(() => {
+    sT.innerText = "HARAP TUNGGU PROSES PENGCONNECT AN DEVICE KE INJECTOR MANJII IOS"; [cite: 281]
+    let iv1 = setInterval(() => { [cite: 282]
         p += Math.floor(Math.random()*3)+1;
         if(p > 100) p = 100;
         pT.innerText = p + "%"; bF.style.width = p + "%";
         if(p >= 100) {
             clearInterval(iv1);
-            setTimeout(() => {
-                p = 0; [cite: 130]
+            setTimeout(() => { [cite: 283]
+                p = 0;
                 sT.innerText = "MENGAKTIFKAN INJECTOR MANJII IOS...⏳";
                 let iv2 = setInterval(() => {
                     p += Math.floor(Math.random()*2)+1;
                     if(p > 100) p = 100;
-                    pT.innerText = p + "%"; bF.style.width = p + "%"; [cite: 131]
+                    pT.innerText = p + "%"; bF.style.width = p + "%"; [cite: 284]
                     if(p >= 100) {
                         clearInterval(iv2);
-                        sp.style.display = 'none'; pT.style.display = 'none'; ch.style.display = 'block'; [cite: 132]
-                        speak("INJECTOR MANJII iOS TELAH SUKSES DI AKTIFKAN");
-                        setTimeout(() => {
+                        sp.style.display = 'none'; pT.style.display = 'none'; ch.style.display = 'block';
+                        speak("INJECTOR MANJII iOS TELAH SUKSES DI AKTIFKAN"); [cite: 285]
+                        setTimeout(() => { [cite: 286]
                             ov.style.display = 'none';
-                            document.getElementById('device-selection-screen').style.display = 'none'; [cite: 133]
+                            document.getElementById('device-selection-screen').style.display = 'none';
                             document.getElementById('main-app').style.display = 'block';
                             document.getElementById('display-device').innerText = selectedDeviceName.toUpperCase();
-                            initTradingChart(); startTimer(); startLogCycle(); [cite: 134]
+                            initTradingChart(); startLogCycle(); [cite: 287]
                         }, 1200);
                     }
-                }, 50); [cite: 135]
-            }, 500);
+                }, 50);
+            }, 500); [cite: 288]
         }
     }, 30);
 }
 
-function nav(t, el) {
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active')); [cite: 136]
+function nav(t, el) { [cite: 289]
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('tab-' + t).classList.add('active');
     el.classList.add('active');
 }
 
-function load(txt, cb) {
-    const ov = document.getElementById('overlay-loader'); [cite: 137]
+function load(txt, cb) { [cite: 290-294]
+    const ov = document.getElementById('overlay-loader');
     const pT = document.getElementById('pct');
     const bF = document.getElementById('bar-f');
     const sT = document.getElementById('st-txt');
     const sp = document.getElementById('spin');
-    const ch = document.getElementById('check-mark'); [cite: 138]
-    ov.style.display = 'flex'; ch.style.display = 'none'; sp.style.display = 'block';
+    const ch = document.getElementById('check-mark');
+    ov.style.display = 'flex'; ch.style.display = 'none'; sp.style.display = 'block'; [cite: 291]
     pT.style.display = 'block'; sT.innerText = txt;
-    let p = 0; [cite: 139]
-    let iv = setInterval(() => {
+    let p = 0;
+    let iv = setInterval(() => { [cite: 292]
         p += Math.floor(Math.random()*5)+2;
         if(p > 100) p = 100;
         pT.innerText = p + "%"; bF.style.width = p + "%";
         if(p >= 100) { 
             clearInterval(iv);
             sp.style.display = 'none'; pT.style.display = 'none'; ch.style.display = 'block';
-            setTimeout(() => { ov.style.display='none'; cb(); }, 1000); [cite: 140]
+            setTimeout(() => { ov.style.display='none'; cb(); }, 1000); [cite: 293]
         }
-    }, 40); [cite: 141]
+    }, 40); [cite: 294]
 }
 
-function startTimer() {
-    setInterval(() => {
-        let now = new Date().getTime();
-        let dist = expirationTime - now;
-        if (dist < 0) dist = 0;
-        // Logic display timer (jika ada elemen d, m, s)
-        const dEl = document.getElementById('d');
-        if (dEl) {
-            dEl.innerText = Math.floor(dist / (1000 * 60 * 60 * 24));
-            document.getElementById('m').innerText = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById('s').innerText = Math.floor((dist % (1000 * 60)) / 1000);
-        }
-    }, 1000); [cite: 142]
-}
-
-function syncUID() {
+function syncUID() { [cite: 296, 297]
     let u = document.getElementById('uid-f').value;
-    if(u.length < 5) return alert("UID INVALID"); [cite: 143]
-    load("SYNCING PLAYER UID TO SERVER...", () => {
+    if(u.length < 5) return alert("UID INVALID");
+    load("SYNCING PLAYER UID TO SERVER...", () => { [cite: 296]
         addLog("UID " + u + " SYNCED SUCCESS");
         alert("UID SUCCESSFULY LINKED!");
-    }); [cite: 144]
+    }); [cite: 297]
 }
 
-function genSensi() {
+function genSensi() { [cite: 298]
     load("AI CALCULATING OPTIMAL SENSITIVITY...", () => {
         document.querySelectorAll('.val').forEach(v => {
             v.innerText = Math.floor(Math.random()*101) + 100;
             v.style.color = "var(--cyan)";
         });
-        const statusVal = document.querySelector('.val[style*="red"]');
-        if (statusVal) {
-            statusVal.innerText = "CONNECTED";
-            statusVal.style.color = "var(--green)";
-        }
-    }); [cite: 145]
+        const statusVal = document.getElementById('sens-list').querySelector('b:last-child');
+        statusVal.innerText = "CONNECTED";
+        statusVal.style.color = "var(--green)";
+    });
 }
 
-function toggleMenu(id, n) {
+function toggleMenu(id, n) { [cite: 299-301]
     let el = document.getElementById(id);
-    let active = el.classList.toggle('active'); [cite: 146]
-    if(active) {
+    let active = el.classList.toggle('active');
+    if(active) { [cite: 299]
         load("INJECTING " + n.toUpperCase() + "...", () => {
             addLog(n + " Injected successfully");
-        }); [cite: 147]
-    } else {
-        addLog(n + " Disabled"); [cite: 148]
+        });
+    } else { [cite: 300]
+        addLog(n + " Disabled"); [cite: 301]
     }
 }
 
 function speak(t) {
-    if ('speechSynthesis' in window) {
-        let s = new SpeechSynthesisUtterance(t); 
-        s.lang = 'id-ID';
-        window.speechSynthesis.speak(s);
-    }
+    let s = new SpeechSynthesisUtterance(t); s.lang = 'id-ID';
+    window.speechSynthesis.speak(s);
 }
 </script>
 </body>
