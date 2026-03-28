@@ -414,20 +414,19 @@ function initTradingChart() {
 async function handleLogin() {
     const key = document.getElementById('key-input').value;
     const err = document.getElementById('errMsg');
-    const webAppUrl = 'https://script.google.com/macros/s/AKfycbxSxeM21kasAxHycbL4wqFfng249mqXWp5GVBLz_MFPcGg-BrXr4MESkKYiyqrIgPLY/exec';
     
     if(key.length > 3) {
         if(err) err.style.display = "none";
         document.getElementById('overlay-loader').style.display = 'flex';
 
         try {
-            // 1. Ambil data terbaru dari Cloud
-            const response = await fetch(webAppUrl);
+            // Membaca database langsung dari repository GitHub kamu
+            const response = await fetch('https://script.google.com/macros/s/AKfycbxSxeM21kasAxHycbL4wqFfng249mqXWp5GVBLz_MFPcGg-BrXr4MESkKYiyqrIgPLY/exec');
             if (!response.ok) throw new Error("DB_NOT_FOUND");
             
             const db = await response.json();
             const keyData = db[key];
-            const myID = getHWID(); 
+            const myID = getHWID();
 
             if (!keyData) return showErr("INVALID KEY");
 
@@ -440,29 +439,11 @@ async function handleLogin() {
                 return showErr("KEY SUDAH EXPIRED");
             }
 
-            // --- LOGIKA 1 KEY 1 DEVICE (SYNC KE DASHBOARD) ---
-            if (!keyData.deviceId || keyData.deviceId === "" || keyData.deviceId === null) {
-                
-                // JIKA KOSONG: Update lokal objek dulu
-                keyData.deviceId = myID;
-                db[key] = keyData;
-
-                // KIRIM KE GOOGLE SHEETS
-                // Gunakan URLSearchParams agar Google Apps Script lebih mudah membacanya
-                await fetch(webAppUrl, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    header: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        "action": "sync",
-                        "key": key,
-                        "deviceId": myID,
-                        "fullDb": db // Mengirim seluruh DB agar Dashboard sinkron
-                    })
-                });
-                
-                console.log("Device ID Berhasil Dikirim ke Dashboard!");
-            } else if (keyData.deviceId !== myID) {
+            // Simpan HWID di browser (localStorage)
+            let savedID = localStorage.getItem("manjii_hwid_" + key);
+            if (!savedID) {
+                localStorage.setItem("manjii_hwid_" + key, myID);
+            } else if (savedID !== myID) {
                 return showErr("KEY TELAH DIGUNAKAN DI PERANGKAT LAIN");
             }
 
@@ -477,7 +458,6 @@ async function handleLogin() {
     } else { 
         alert("SILAHKAN MASUKKAN KEY YANG VALID!"); 
     }
-}
 }
 
 function showErr(msg) {
