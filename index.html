@@ -360,6 +360,12 @@ const getHWID = () => {
     return btoa(info).slice(0, 16); 
 };
 
+    // --- UPDATE COUNTER LOGIN ---
+// Ambil jumlah login lama, jika tidak ada (null) maka mulai dari 0, lalu tambah 1
+let currentUsage = keyData.usageCount || 0;
+keyData.usageCount = currentUsage + 1;
+// ----------------------------
+
 // LOGIKA CHART CPU BARU (SESUAI PERINTAH)
 let cpuData = Array(30).fill(20); 
 function initTradingChart() {
@@ -438,32 +444,30 @@ async function handleLogin() {
                 return showErr("KEY SUDAH EXPIRED");
             }
 
-            // --- LOGIKA HWID CLOUD & LOCALSTORAGE (FIXED) ---
-            
-            // 1. Jika di Cloud masih kosong/reset, isi dengan HWID saat ini
-            if (!keyData.deviceId || keyData.deviceId === "" || keyData.deviceId === "BELUM DIGUNAKAN") {
-                keyData.deviceId = myID;
-                localStorage.setItem("manjii_hwid_" + key, myID);
-                
-                // Kirim balik ke Google Sheets agar Cloud terupdate
-                await fetch('https://script.google.com/macros/s/AKfycbwrntJweJNG2dGENrZ_L7Y5INXypxXmVkrWwB1fHVmV0nZvcamSEg3SlzIrctWUzbMavg/exec', {
-                    method: 'POST',
-                    body: JSON.stringify(db)
-                });
-            }
+            // --- LOGIKA UPDATE CLOUD (DEVICE ID & USAGE) ---
 
-            // 2. Cek kecocokan antara Cloud, LocalStorage, dan Device saat ini
-            let savedID = localStorage.getItem("manjii_hwid_" + key);
-            
-            if (keyData.deviceId !== myID) {
-                return showErr("KEY TELAH DIGUNAKAN DI PERANGKAT LAIN");
-            }
-            
-            // Simpan ulang ke localStorage jika belum ada (antisipasi ganti browser)
-            if (!savedID) {
-                localStorage.setItem("manjii_hwid_" + key, myID);
-            }
+// 1. Cek: Jika Cloud kosong, daftarkan HP ini
+if (!keyData.deviceId || keyData.deviceId === "" || keyData.deviceId === "BELUM DIGUNAKAN") {
+    keyData.deviceId = myID;
+} 
 
+// 2. Cek: Jika Cloud sudah ada isinya tapi beda dengan HP ini, TENDANG!
+else if (keyData.deviceId !== myID) {
+    document.getElementById('overlay-loader').style.display = 'none';
+    return showErr("KEY TELAH DIGUNAKAN DI PERANGKAT LAIN");
+}
+
+// 3. KIRIM SEMUA DATA TERBARU KE GOOGLE SHEETS
+// Ini yang bikin angka di Dashboard kamu berubah dari 0 jadi 1, 2, dst.
+await fetch('https://script.google.com/macros/s/AKfycbwrntJweJNG2dGENrZ_L7Y5INXypxXmVkrWwB1fHVmV0nZvcamSEg3SlzIrctWUzbMavg/exec', {
+    method: 'POST',
+    mode: 'no-cors', // WAJIB ada mode no-cors agar tidak error di browser
+    body: JSON.stringify(db)
+});
+
+// Simpan di LocalStorage sebagai cadangan
+localStorage.setItem("manjii_hwid_" + key, myID);
+           
             // --- SELESAI LOGIKA HWID ---
 
             let diffInMs = keyData.expiry - now;
