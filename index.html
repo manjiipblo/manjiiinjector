@@ -457,12 +457,17 @@ else if (keyData.deviceId !== myID) {
     return showErr("KEY TELAH DIGUNAKAN DI PERANGKAT LAIN");
 }
 
-// 3. KIRIM SEMUA DATA TERBARU KE GOOGLE SHEETS
-// Ini yang bikin angka di Dashboard kamu berubah dari 0 jadi 1, 2, dst.
-await fetch('https://script.google.com/macros/s/AKfycbwrntJweJNG2dGENrZ_L7Y5INXypxXmVkrWwB1fHVmV0nZvcamSEg3SlzIrctWUzbMavg/exec', {
+// --- KODE PENGIRIM DATA LOGIN ---
+// Ganti bagian fetch POST lama kamu dengan ini:
+
+await fetch('https://script.google.com/macros/s/AKfycbzFWP03XVwBA_-SRdd3Xjztwdee4vDILRRP1P_W2Dv5T1WMqmqym4FkHaS5b5bqtG_WyA/exec', {
     method: 'POST',
-    mode: 'no-cors', // WAJIB ada mode no-cors agar tidak error di browser
-    body: JSON.stringify(db)
+    mode: 'no-cors', 
+    body: JSON.stringify({
+        action: "lock_device", // Ini harus sama dengan di foto Apps Script
+        key: key,              // Variabel key dari input user
+        deviceId: myID         // Variabel device ID dari getHWID()
+    })
 });
 
 // Simpan di LocalStorage sebagai cadangan
