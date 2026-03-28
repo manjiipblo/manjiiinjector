@@ -448,6 +448,7 @@ async function handleLogin() {
                 // Kirim balik ke Google Sheets agar Cloud terupdate
                 await fetch('https://script.google.com/macros/s/AKfycbwrntJweJNG2dGENrZ_L7Y5INXypxXmVkrWwB1fHVmV0nZvcamSEg3SlzIrctWUzbMavg/exec', {
                     method: 'POST',
+                    mode: 'no-cors',
                     body: JSON.stringify(db)
                 });
             }
