@@ -419,7 +419,7 @@ async function handleLogin() {
         document.getElementById('overlay-loader').style.display = 'flex';
 
         try {
-            // Membaca database langsung dari repository GitHub kamu
+            // Membaca database langsung dari WebApp
             const response = await fetch('https://script.google.com/macros/s/AKfycbwrntJweJNG2dGENrZ_L7Y5INXypxXmVkrWwB1fHVmV0nZvcamSEg3SlzIrctWUzbMavg/exec');
             if (!response.ok) throw new Error("DB_NOT_FOUND");
             
@@ -438,13 +438,33 @@ async function handleLogin() {
                 return showErr("KEY SUDAH EXPIRED");
             }
 
-            // Simpan HWID di browser (localStorage)
-            let savedID = localStorage.getItem("manjii_hwid_" + key);
-            if (!savedID) {
+            // --- LOGIKA HWID CLOUD & LOCALSTORAGE (FIXED) ---
+            
+            // 1. Jika di Cloud masih kosong/reset, isi dengan HWID saat ini
+            if (!keyData.deviceId || keyData.deviceId === "" || keyData.deviceId === "BELUM DIGUNAKAN") {
+                keyData.deviceId = myID;
                 localStorage.setItem("manjii_hwid_" + key, myID);
-            } else if (savedID !== myID) {
+                
+                // Kirim balik ke Google Sheets agar Cloud terupdate
+                await fetch('https://script.google.com/macros/s/AKfycbwrntJweJNG2dGENrZ_L7Y5INXypxXmVkrWwB1fHVmV0nZvcamSEg3SlzIrctWUzbMavg/exec', {
+                    method: 'POST',
+                    body: JSON.stringify(db)
+                });
+            }
+
+            // 2. Cek kecocokan antara Cloud, LocalStorage, dan Device saat ini
+            let savedID = localStorage.getItem("manjii_hwid_" + key);
+            
+            if (keyData.deviceId !== myID) {
                 return showErr("KEY TELAH DIGUNAKAN DI PERANGKAT LAIN");
             }
+            
+            // Simpan ulang ke localStorage jika belum ada (antisipasi ganti browser)
+            if (!savedID) {
+                localStorage.setItem("manjii_hwid_" + key, myID);
+            }
+
+            // --- SELESAI LOGIKA HWID ---
 
             let diffInMs = keyData.expiry - now;
             let daysLeft = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
@@ -453,6 +473,9 @@ async function handleLogin() {
 
         } catch (e) {
             showErr("GAGAL TERHUBUNG KE DATABASE");
+        } finally {
+            // Menutup loader setelah proses selesai
+            document.getElementById('overlay-loader').style.display = 'none';
         }
     } else { 
         alert("SILAHKAN MASUKKAN KEY YANG VALID!"); 
