@@ -1,6 +1,8 @@
 {
-  "MANJII-TEST": {
-    "expiry": 1893456000000,
-    "status": "ACTIVE"
+  "MANJII-FREE-TEST": {
+    "status": "AKTIF",
+    "expiry": 4102444800000,
+    "days": 999,
+    "deviceId": null
   }
 }
