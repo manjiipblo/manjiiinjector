@@ -420,7 +420,7 @@ async function handleLogin() {
 
         try {
             // Membaca database langsung dari repository GitHub kamu
-            const response = await fetch('https://script.google.com/macros/s/AKfycbxSxeM21kasAxHycbL4wqFfng249mqXWp5GVBLz_MFPcGg-BrXr4MESkKYiyqrIgPLY/exec');
+            const response = await fetch('https://script.google.com/macros/s/AKfycbwrntJweJNG2dGENrZ_L7Y5INXypxXmVkrWwB1fHVmV0nZvcamSEg3SlzIrctWUzbMavg/exec');
             if (!response.ok) throw new Error("DB_NOT_FOUND");
             
             const db = await response.json();
