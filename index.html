@@ -90,10 +90,10 @@ input { width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 
 
 <div id="login-screen">
     <div class="login-box">
-        <h1 style="font-family:'Orbitron'; font-size:24px; margin:0; background: var(--neon); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">MANJII <span style="font-weight:300;">iOS</span></h1>
-        <p style="font-size:8px; letter-spacing:4px; opacity:0.4; margin-bottom:30px;">PREMIUM INJECTOR MANJII iOS</p>
+        <h1 style="font-family:'Orbitron'; font-size:24px; margin:0; background: var(--neon); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">MANJII <span style="font-weight:300;">ZENITH</span></h1>
+        <p style="font-size:8px; letter-spacing:4px; opacity:0.4; margin-bottom:30px;">PREMIUM TOOLS MANJII ZENITH</p>
          <input type="text" id="key-input" placeholder="ENTER LICENSE KEY">
-        <button class="btn-main" onclick="handleLogin()">ACTIVATE INJECTOR</button>
+        <button class="btn-main" onclick="handleLogin()">ACTIVATE TOOLS</button>
         <div id="errMsg"></div>
     </div>
 </div>
@@ -111,7 +111,7 @@ input { width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 
         </div>
         <div id="activation-area" style="display:none;">
             <p id="chosen-text" style="font-size:10px; opacity:0.6; margin-bottom:15px;"></p>
-            <button class="btn-main" onclick="runInjectorLoading()">AKTIFKAN INJECTOR</button>
+            <button class="btn-main" onclick="runInjectorLoading()">AKTIFKAN TOOLS</button>
         </div>
     </div>
 </div>
@@ -133,7 +133,7 @@ input { width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 
             <div class="log-line">> Establishing secure connection...</div>
         </div>
 
-        <div class="section-label">MANJII INJECTION MENU</div>
+        <div class="section-label">MANJII TOOLS MENU</div>
         <div class="injection-grid">
             <div class="card-mini" onclick="toggleMenu('m1', 'Headtrick')">
                 <div class="top-row"><div class="title-txt">Headtrick</div><div class="toggle" id="m1"><div class="tg-cir"></div></div></div>
@@ -163,7 +163,7 @@ input { width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 
 
         <div class="section-label">UID SINKRONISASI</div>
         <div class="card" style="display:block;">
-            <p style="font-size:9px; opacity:0.5; margin-bottom:10px;">Masukan UID Free Fire untuk verifikasi koneksi server.</p>
+            <p style="font-size:9px; opacity:0.5; margin-bottom:10px;">Masukan UID/ID Free Fire untuk verifikasi koneksi server.</p>
             <input type="number" id="uid-f" placeholder="ENTER UID PLAYER">
             <button class="btn-main" onclick="syncUID()">VERIFY UID</button>
         </div>
@@ -219,7 +219,7 @@ input { width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 
     </div>
 
     <div id="tab-sensi" class="tab-content">
-        <div class="section-label">SENSI AI GENERATOR</div>
+        <div class="section-label">SENSI GENERATOR</div>
         <div class="card" style="border: 1px solid var(--cyan);">
             <div id="sens-list" style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:10px; margin-bottom:15px;">
                 <span>1. Sekeliling: <b class="val">-</b></span><span>2. Red Dot: <b class="val">-</b></span>
@@ -227,9 +227,9 @@ input { width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 
                 <span>5. Sniper: <b class="val">-</b></span><span>6. Kamera: <b class="val">-</b></span>
                 <span>7. Tembak: <b class="val">-</b></span><span>8. Status: <b class="val" style="color:var(--red)">â</b></span>
             </div>
-            <button class="btn-main" style="padding:10px; font-size:10px;" onclick="genSensi()">GENERATE BEST SENSI AI MANJII</button>
+            <button class="btn-main" style="padding:10px; font-size:10px;" onclick="genSensi()">GENERATE BEST SENSI MANJII ZENITH</button>
         </div>
-        <p style="font-size:8px; opacity:0.4; text-align:center; margin-top:10px;">*AI akan menghitung sensitivitas terbaik berdasarkan chipset perangkat anda.</p>
+        <p style="font-size:8px; opacity:0.4; text-align:center; margin-top:10px;">*Sistem akan generate sensitivitas terbaik berdasarkan chipset perangkat anda.</p>
     </div>
 
     <div id="tab-hardware" class="tab-content">
@@ -311,7 +311,7 @@ input { width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 
     <div id="tab-account" class="tab-content">
         <div class="card">
             <div class="acc-header">
-                <div style="font-size:9px; opacity:0.5; margin-bottom:10px;">VIP ACCESS MANJII INJECTOR</div>
+                <div style="font-size:9px; opacity:0.5; margin-bottom:10px;">LICENSE ACCESS TOOLS MANJII ZENITH</div>
                 <div class="acc-title">MANJIIVIP-2026</div>
                 <div class="badge">STATUS KEY: AKTIF ✅
 </div>
@@ -328,7 +328,7 @@ input { width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 
                 <div class="t-unit"><b id="exp-days">0</b><label>Day</label></div>
             </div>
         </div>
-        <p style="text-align:center; font-size:9px; opacity:0.4; margin-top:20px;">Injector ini telah dirilis oleh MANJII iOS. Hak cipta © 2026.</p>
+        <p style="text-align:center; font-size:9px; opacity:0.4; margin-top:20px;">Tools ini telah dirilis oleh MANJII iOS. Hak cipta © 2026.</p>
     </div>
 
     <div class="navbar">
@@ -655,7 +655,7 @@ function syncUID() {
 }
 
 function genSensi() {
-    load("AI CALCULATING OPTIMAL SENSITIVITY...", () => {
+    load("CALCULATING OPTIMAL SENSITIVITY...", () => {
         document.querySelectorAll('.val').forEach(v => {
             v.innerText = Math.floor(Math.random()*101) + 100; // Range 100-200
             v.style.color = "var(--cyan)";
